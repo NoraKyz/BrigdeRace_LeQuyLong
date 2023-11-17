@@ -1,7 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public abstract class Character : MonoBehaviour
 {
@@ -13,13 +12,16 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] List<CharacterBrick> bricks = new List<CharacterBrick>();
     
-    protected string currentAnimName;
-    protected virtual void Start()
+    protected CharacterAnimID currentAnimID;
+    
+    private static readonly int AnimID = Animator.StringToHash("AnimID");
+
+    protected void Start()
     {
         OnInit();
     }
 
-    protected void OnInit()
+    protected virtual void OnInit()
     {
         
     }
@@ -41,15 +43,14 @@ public abstract class Character : MonoBehaviour
 
     protected abstract void Move();
 
-    protected void ChangeAnim(string animName)
+    protected void ChangeAnim(CharacterAnimID animID)
     {
-        if (currentAnimName == animName)
+        if (currentAnimID == animID)
         {
             return;
         }
         
-        anim.ResetTrigger(animName);
-        currentAnimName = animName;
-        anim.SetTrigger(animName);
+        currentAnimID = animID;
+        anim.SetInteger(AnimID, (int) animID);
     }
 }
