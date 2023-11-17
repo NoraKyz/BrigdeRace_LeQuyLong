@@ -5,7 +5,7 @@ using Utils;
 public abstract class Character : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Animator anim;
     
     [Header("Properties")]
