@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -7,14 +8,15 @@ public abstract class Character : MonoBehaviour
     [Header("Components")]
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Animator anim;
+    [SerializeField] protected SkinnedMeshRenderer modelCharacter;
     
     [Header("Properties")]
     [SerializeField] protected float speed;
+    [SerializeField] protected ColorData colorData;
+    [SerializeField] protected ColorType colorType;
     [SerializeField] List<CharacterBrick> bricks = new List<CharacterBrick>();
     
-    protected CharacterAnimID currentAnimID;
-    
-    private static readonly int AnimID = Animator.StringToHash("AnimID");
+    protected string currentAnimName;
 
     protected void Start()
     {
@@ -23,7 +25,12 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void OnInit()
     {
-        
+        modelCharacter.material = colorData.GetMaterial(colorType);
+    }
+
+    protected void LateUpdate()
+    {
+        RotateTowardMoveDirection();
     }
 
     protected void AddBrick()
@@ -43,14 +50,27 @@ public abstract class Character : MonoBehaviour
 
     protected abstract void Move();
 
-    protected void ChangeAnim(CharacterAnimID animID)
+    protected void ChangeAnim(string animName)
     {
-        if (currentAnimID == animID)
+        if (currentAnimName == animName)
         {
             return;
         }
         
-        currentAnimID = animID;
-        anim.SetInteger(AnimID, (int) animID);
+        anim.ResetTrigger(animName);
+        currentAnimName = animName;
+        anim.SetTrigger(animName);
+    }
+    
+    protected void RotateTowardMoveDirection()
+    {
+        if (rb.velocity == Vector3.zero)
+        {
+            return;
+        }
+        
+        Vector3 targetRotation = rb.velocity;
+        targetRotation.y = 0;
+        transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
     }
 }
