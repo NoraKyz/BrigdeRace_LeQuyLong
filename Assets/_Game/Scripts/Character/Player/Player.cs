@@ -17,7 +17,7 @@ public class Player : Character
     private void Update()
     {
         GetInput();
-
+        
         Move();
     }
 
@@ -61,4 +61,5 @@ public class Player : Character
         _currentVelocity.Normalize();
         rb.velocity = _currentVelocity * moveSpeed;
     }
+    
 }

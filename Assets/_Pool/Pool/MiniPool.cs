@@ -69,5 +69,4 @@ public class MiniPool<T> where T : Component
             GameObject.Destroy(pools.Dequeue().gameObject);
         }
     }
-
 }

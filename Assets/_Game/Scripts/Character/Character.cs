@@ -9,6 +9,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Animator anim;
     [SerializeField] protected SkinnedMeshRenderer modelCharacter;
+    [SerializeField] protected LayerMask stairLayer;
     
     [Header("Properties")]
     [SerializeField] protected float moveSpeed;

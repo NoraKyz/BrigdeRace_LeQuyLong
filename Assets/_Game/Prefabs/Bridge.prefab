@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bridgeBrickPrefab: {fileID: 2049307676147224848, guid: 25708093b0c8bd54b88e5c8fe9af9640, type: 3}
   bridgeLength: 10
-  offset: {x: 0, y: 0.25, z: 0.5}
+  offset: {x: 0, y: 0.5, z: 1}
