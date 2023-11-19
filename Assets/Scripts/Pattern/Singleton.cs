@@ -2,26 +2,29 @@ using UnityEngine;
 
 namespace Pattern
 {
-    public class Singleton<T> : MonoBehaviour where T : Object
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static T _instance;
-    
-        public static T Instance
+        private static T ins;
+
+        public static T Ins
         {
             get
             {
-                if (_instance == null)
+                if (ins == null)
                 {
-                    _instance = FindObjectOfType<T>();
+                    // Find singleton
+                    ins = FindObjectOfType<T>();
+
+                    // Create new instance if one doesn't already exist.
+                    if (ins == null)
+                    {
+                        // Need to create a new GameObject to attach the singleton to.
+                        ins = new GameObject(nameof(T)).AddComponent<T>();
+                    }
+
                 }
-
-                return _instance;
+                return ins;
             }
-        }
-
-        protected virtual void Awake()
-        {
-            _instance = this as T;
         }
     }
 }

@@ -11,7 +11,7 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected SkinnedMeshRenderer modelCharacter;
     
     [Header("Properties")]
-    [SerializeField] protected float speed;
+    [SerializeField] protected float moveSpeed;
     [SerializeField] protected ColorData colorData;
     [SerializeField] protected ColorType colorType;
     [SerializeField] List<CharacterBrick> bricks = new List<CharacterBrick>();
@@ -25,7 +25,7 @@ public abstract class Character : MonoBehaviour
 
     protected virtual void OnInit()
     {
-        modelCharacter.material = colorData.GetMaterial(colorType);
+        ChangeColor(colorType);
     }
 
     protected void LateUpdate()
@@ -71,6 +71,13 @@ public abstract class Character : MonoBehaviour
         
         Vector3 targetRotation = rb.velocity;
         targetRotation.y = 0;
-        transform.rotation = Quaternion.LookRotation(targetRotation, Vector3.up);
+        transform.rotation = Quaternion.LookRotation(targetRotation);
     }
+
+    protected void ChangeColor(ColorType colorType)
+    {
+        this.colorType = colorType;
+        modelCharacter.material = colorData.GetMaterial(colorType);
+    }
+
 }

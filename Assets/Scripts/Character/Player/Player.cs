@@ -5,23 +5,22 @@ using UnityEngine;
 using Utils;
 
 public class Player : Character
-{   
-    [Header("Controller")]
+{
+    [Header("Controller")] 
     [SerializeField] private FloatingJoystick joystick;
     
     private bool _isMoving = false;
     private bool _isFalling = false;
     
-    private Vector2 moveDirection = Vector2.zero;
-    private Vector3 _currentVelocity = Vector3.zero;
+    private Vector3 _currentVelocity;
     
     private void Update()
     {
         GetInput();
-        
+
         Move();
     }
-    
+
     protected override void OnInit()
     {
         base.OnInit();
@@ -33,10 +32,8 @@ public class Player : Character
         {
             return;
         }
-        
-        moveDirection = joystick.Direction;
-        
-        if (moveDirection != Vector2.zero)
+
+        if (joystick.Direction.magnitude > 0.01f)
         {
             _isMoving = true;
             ChangeAnim(CharacterAnimName.Run);
@@ -51,16 +48,17 @@ public class Player : Character
     {
         if (!_isMoving)
         {
-            SetVelocity(0,0,0);
+            SetVelocity(0, 0 ,0);
             return;
-        } 
+        }
         
-        SetVelocity(moveDirection.x, rb.velocity.y, moveDirection.y);
+        SetVelocity(joystick.Horizontal, 0, joystick.Vertical);
     }
+    
     private void SetVelocity(float x, float y, float z)
     {
         _currentVelocity.Set(x, y, z);
         _currentVelocity.Normalize();
-        rb.velocity = _currentVelocity * speed;
+        rb.velocity = _currentVelocity * moveSpeed;
     }
 }
