@@ -28,7 +28,7 @@ public class Brick : GameUnit
         SimplePool.Despawn(this);
     }
     
-    protected void ChangeColor(ColorType colorType)
+    public void ChangeColor(ColorType colorType)
     {
         this.colorType = colorType;
         meshRenderer.material = colorData.GetMaterial(colorType);

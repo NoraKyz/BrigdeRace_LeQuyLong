@@ -7,5 +7,6 @@ namespace Utils
         
         // Brick
         public const float BridgeBrickHeight = 0.5f;
+        public const float CharacterBrickHeight = 0.2f;
     }
 }

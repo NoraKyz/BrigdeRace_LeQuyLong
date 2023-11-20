@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -20,7 +21,7 @@ public abstract class Character : MonoBehaviour
     protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
     
     protected string currentAnimName;
-    public bool HasBrick => bricks.Count > 0;
+    public int BrickAmount => bricks.Count;
     public ColorType ColorType => colorType;
 
     protected void Start()
@@ -33,29 +34,17 @@ public abstract class Character : MonoBehaviour
     }
     protected void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Character"))
+        {
+            OnTriggerCharacter(other);
+        }
     }
-
     protected virtual void OnInit()
     {
         ChangeColor(colorType);
     }
-    public void AddBrick()
-    {
-        
-    }
-
-    public void RemoveBrick()
-    {
-        
-    }
-
-    public void DropBrick()
-    {
-        
-    }
-
-    protected abstract void Move();
+    protected virtual void OnTriggerCharacter(Collider other) { }
+    protected virtual void Move() { }
     protected void ChangeAnim(string animName)
     {
         if (currentAnimName == animName)
@@ -83,5 +72,36 @@ public abstract class Character : MonoBehaviour
         this.colorType = colorType;
         modelCharacter.material = colorData.GetMaterial(colorType);
     }
-
+    public void AddBrick()
+    {
+        CharacterBrick brick = SimplePool.Spawn<CharacterBrick>(
+            PoolType.CharacterBrick, 
+            GetNextBrickPosition(),
+            Quaternion.identity, 
+            brickHolder
+        );
+        brick.ChangeColor(colorType);
+        bricks.Push(brick);
+    }
+    public void RemoveBrick()
+    {
+        SimplePool.Despawn(bricks.Pop());
+    }
+    public void DropBrick()
+    {
+        while (BrickAmount > 0)
+        {
+            
+        }
+    }
+    public Vector3 GetNextBrickPosition()
+    {
+        if(BrickAmount == 0)
+        {
+            return Vector3.zero;
+        }
+        
+        return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickHeight * 1.2f;
+    }
+    
 }

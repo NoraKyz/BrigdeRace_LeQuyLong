@@ -10,7 +10,7 @@ public class BrigdeBrick : Brick
         {
             Character character = other.GetComponent<Character>();
 
-            if (character.ColorType != colorType && character.HasBrick)
+            if (character.ColorType != colorType && character.BrickAmount > 0)
             {
                 character.RemoveBrick();
                 ChangeColor(character.ColorType);
