@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 750254363544451535}
   m_Layer: 0
   m_Name: PlatformBrick
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,9 +59,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7333ec3e285680449b7892a1eaec54c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 4
   meshRenderer: {fileID: 4547519837336414415}
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
-  colorType: 1
+  colorType: 0
 --- !u!1 &9172190985823867234
 GameObject:
   m_ObjectHideFlags: 0

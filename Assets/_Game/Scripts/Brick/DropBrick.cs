@@ -1,18 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropBrick : MonoBehaviour
+public class DropBrick : Brick
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
+        if (other.CompareTag("Character"))
+        {
+            Character character = other.GetComponent<Character>();
+            character.AddBrick();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            OnDespawn();
+        }
     }
 }

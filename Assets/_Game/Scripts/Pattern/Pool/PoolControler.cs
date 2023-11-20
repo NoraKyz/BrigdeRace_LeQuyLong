@@ -138,17 +138,16 @@ public class ParticleAmount
 
 public enum ParticleType
 {
-    Hit
+    
 }
 
 public enum PoolType
 {
     None,
-
-    Bullet_1,
-    Bullet_2,
-    Bullet_3,
-    Bullet_4,
+    BrigdeBrick,
+    CharacterBrick,
+    DropBrick,
+    PlatformBrick
 }
 
 

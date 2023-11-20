@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 
-public class Brick : MonoBehaviour
+public class Brick : GameUnit
 {
     [Header("Components")]
     [SerializeField] protected MeshRenderer meshRenderer;
@@ -13,20 +13,31 @@ public class Brick : MonoBehaviour
     [SerializeField] protected ColorData colorData;
     [SerializeField] protected ColorType colorType;
     
-
     protected void Start()
     {
         OnInit();
     }
     
-    protected void OnInit()
+    protected virtual void OnInit()
     {
         ChangeColor(colorType);
+    }
+    
+    protected virtual void OnDespawn()
+    {
+        SimplePool.Despawn(this);
     }
     
     protected void ChangeColor(ColorType colorType)
     {
         this.colorType = colorType;
         meshRenderer.material = colorData.GetMaterial(colorType);
+    }
+    
+    protected virtual IEnumerator FlyToCharacter(Vector3 targetPosition)
+    {
+        // TODO: effect fly to player
+        yield return new WaitForSeconds(1f);
+        OnDespawn();
     }
 }

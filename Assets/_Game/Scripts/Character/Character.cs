@@ -15,42 +15,47 @@ public abstract class Character : MonoBehaviour
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected ColorData colorData;
     [SerializeField] protected ColorType colorType;
-    [SerializeField] List<CharacterBrick> bricks = new List<CharacterBrick>();
+    [SerializeField] protected Transform brickHolder;
+    
+    protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
     
     protected string currentAnimName;
+    public bool HasBrick => bricks.Count > 0;
+    public ColorType ColorType => colorType;
 
     protected void Start()
     {
         OnInit();
+    }
+    protected void LateUpdate()
+    {
+        RotateTowardMoveDirection();
+    }
+    protected void OnTriggerEnter(Collider other)
+    {
+        
     }
 
     protected virtual void OnInit()
     {
         ChangeColor(colorType);
     }
-
-    protected void LateUpdate()
-    {
-        RotateTowardMoveDirection();
-    }
-
-    protected void AddBrick()
+    public void AddBrick()
     {
         
     }
 
-    protected void RemoveBrick()
+    public void RemoveBrick()
     {
         
     }
 
-    protected void DropBrick()
+    public void DropBrick()
     {
         
     }
 
     protected abstract void Move();
-
     protected void ChangeAnim(string animName)
     {
         if (currentAnimName == animName)
@@ -62,7 +67,6 @@ public abstract class Character : MonoBehaviour
         currentAnimName = animName;
         anim.SetTrigger(animName);
     }
-    
     protected void RotateTowardMoveDirection()
     {
         if (rb.velocity == Vector3.zero)
@@ -74,7 +78,6 @@ public abstract class Character : MonoBehaviour
         targetRotation.y = 0;
         transform.rotation = Quaternion.LookRotation(targetRotation);
     }
-
     protected void ChangeColor(ColorType colorType)
     {
         this.colorType = colorType;

@@ -19,7 +19,7 @@ public class Bullet : GameUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        ParticlePool.Play(ParticleType.Hit, transform.position, Quaternion.identity);
+        //ParticlePool.Play(ParticleType.Hit, transform.position, Quaternion.identity);
         OnDespawn();
     }
 }
