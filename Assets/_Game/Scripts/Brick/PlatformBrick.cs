@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlatformBrick : Brick
 {
+    public event Action<PlatformBrick> OnDespawnEvent;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Character"))
@@ -14,9 +15,14 @@ public class PlatformBrick : Brick
             if (character.ColorType == colorType)
             {
                 character.AddBrick();
-
                 OnDespawn();
             }
         }
+    }
+    
+    protected override void OnDespawn()
+    {
+        base.OnDespawn();
+        OnDespawnEvent?.Invoke(this);
     }
 }

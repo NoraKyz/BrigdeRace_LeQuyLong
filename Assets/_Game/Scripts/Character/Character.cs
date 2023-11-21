@@ -103,5 +103,4 @@ public abstract class Character : MonoBehaviour
         
         return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickHeight * 1.2f;
     }
-    
 }

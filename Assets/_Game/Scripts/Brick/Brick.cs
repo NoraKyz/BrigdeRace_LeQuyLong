@@ -12,6 +12,7 @@ public class Brick : GameUnit
     [Header("Properties")]
     [SerializeField] protected ColorData colorData;
     [SerializeField] protected ColorType colorType;
+    public ColorType ColorType => colorType;
     
     protected void Start()
     {

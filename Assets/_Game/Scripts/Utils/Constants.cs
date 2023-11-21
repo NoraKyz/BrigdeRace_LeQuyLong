@@ -1,6 +1,6 @@
 namespace Utils
 {
-    public class Constants
+    public static class Constants
     {
         // Input
         public const float MinSwipeDistance = 0.1f;
