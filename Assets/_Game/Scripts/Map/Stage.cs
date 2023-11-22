@@ -16,6 +16,7 @@ public class Stage : MonoBehaviour
      [SerializeField] private Vector3 offset;
      
      private int _maxBrick;
+     private bool HasPosValid => _listNoneBrickPos.Count > 0;
      private List<PlatformBrick> _listBricks = new List<PlatformBrick>();
      private List<Vector3> _listNoneBrickPos = new List<Vector3>();
      private void Awake()
@@ -34,10 +35,10 @@ public class Stage : MonoBehaviour
           {
                SpawnFullBrickByColor(colorType);
           }
-     }
+     }    
      private void GetAllNoneBrickPos()
     {
-         Vector3 startPos = startPointSpawn.position;
+        Vector3 startPos = startPointSpawn.position;
          
         for(int i = 0; i < numRows; i++)
         {
@@ -48,35 +49,28 @@ public class Stage : MonoBehaviour
             }
         }
     }
-     
-     private void SpawnBrick()
+     private void SpawnBrickRandPos(ColorType colorType)
      {
           int index = Random.Range(0, _listNoneBrickPos.Count);
-
-          ColorType colorType = GetRandomColorValid();
+          Vector3 pos = _listNoneBrickPos[index];
           
           PlatformBrick brick = SimplePool.Spawn<PlatformBrick>(
                PoolType.PlatformBrick,
-               _listNoneBrickPos[index],
+               pos,
                Quaternion.identity
           );
           brick.OnDespawnEvent += OnDespawnBrickEvent;
           brick.ChangeColor(colorType);
           
           _listBricks.Add(brick);
-          _listNoneBrickPos.RemoveAt(index);
+          _listNoneBrickPos.Remove(pos);
      }
      private void SpawnFullBrickByColor(ColorType colorType)
      {
-          while (!IsMaxBrickByColor(colorType) && _listNoneBrickPos.Count > 0)
+          while(!IsMaxBrickByColor(colorType) && HasPosValid)
           {
-               SpawnBrick();
+               SpawnBrickRandPos(colorType);
           }
-     }
-     private IEnumerator SpawnBrickDelayTime(float timer)
-     {
-          yield return new WaitForSeconds(timer);
-          SpawnBrick();
      }
      private ColorType GetRandomColorValid()
      {
@@ -127,6 +121,13 @@ public class Stage : MonoBehaviour
      private void OnDespawnBrickEvent(PlatformBrick brick)
      {
           _listBricks.Remove(brick);
-          StartCoroutine(SpawnBrickDelayTime(3f));
+          brick.OnDespawnEvent -= OnDespawnBrickEvent;
+          StartCoroutine(AfterDespawn(brick));
+     }
+     private IEnumerator AfterDespawn(PlatformBrick brick)
+     {
+          yield return new WaitForSeconds(3f);
+          _listNoneBrickPos.Add(brick.transform.position);
+          SpawnBrickRandPos(GetRandomColorValid());
      }
 }
