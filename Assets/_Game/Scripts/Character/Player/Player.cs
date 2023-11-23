@@ -33,7 +33,7 @@ public class Player : Character
             return;
         }
 
-        if (joystick.Direction.magnitude > 0.01f)
+        if (joystick.Direction != Vector2.zero)
         {
             _isMoving = true;
             ChangeAnim(CharacterAnimName.Run);
