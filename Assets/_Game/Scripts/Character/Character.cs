@@ -129,7 +129,7 @@ public abstract class Character : ObjectColor
             }
         }
         
-        if (Physics.Raycast(nextPoint, Vector3.forward, out hit, 1f, gateLayer))
+        if (Physics.Raycast(nextPoint, (nextPoint - transform.position).normalized, out hit, 1f, gateLayer))
         {
             GateOut gateOut = hit.collider.GetComponent<GateOut>();
 

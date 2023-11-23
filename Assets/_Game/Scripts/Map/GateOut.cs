@@ -12,7 +12,7 @@ public class GateOut : MonoBehaviour
     {
         if(other.CompareTag("Character"))
         {
-           
+            
         }
     }
 }
