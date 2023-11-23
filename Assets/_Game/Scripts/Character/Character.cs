@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public abstract class Character : MonoBehaviour
@@ -9,8 +10,8 @@ public abstract class Character : MonoBehaviour
     [Header("Components")]
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected Animator anim;
-    [SerializeField] protected SkinnedMeshRenderer modelCharacter;
-    [SerializeField] protected LayerMask stairLayer;
+    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
+    [SerializeField] protected Transform model;
     
     [Header("Properties")]
     [SerializeField] protected float moveSpeed;
@@ -65,18 +66,18 @@ public abstract class Character : MonoBehaviour
         
         Vector3 targetRotation = rb.velocity;
         targetRotation.y = 0;
-        transform.rotation = Quaternion.LookRotation(targetRotation);
+        model.rotation = Quaternion.LookRotation(targetRotation);
     }
     protected void ChangeColor(ColorType colorType)
     {
         this.colorType = colorType;
-        modelCharacter.material = colorData.GetMaterial(colorType);
+        skinnedMesh.material = colorData.GetMaterial(colorType);
     }
     public void AddBrick()
     {
         CharacterBrick brick = SimplePool.Spawn<CharacterBrick>(
             PoolType.CharacterBrick, 
-            GetNextBrickPosition(),
+            GetNextBrickPos(),
             Quaternion.identity, 
             brickHolder
         );
@@ -94,7 +95,7 @@ public abstract class Character : MonoBehaviour
             
         }
     }
-    public Vector3 GetNextBrickPosition()
+    public Vector3 GetNextBrickPos()
     {
         if(BrickAmount == 0)
         {
