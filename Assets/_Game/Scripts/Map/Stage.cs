@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class Stage : MonoBehaviour
 {
-     // Warning: All brick in this class is platform brick
      [SerializeField] private int numRows, numCols;
      [SerializeField] private int maxPlayer;
      [SerializeField] private List<ColorType> currentColors = new List<ColorType>();
@@ -94,7 +93,7 @@ public class Stage : MonoBehaviour
           int count = 0;
           foreach (var brick in _listBricks)
           {
-               if (brick.ColorType == colorType)
+               if (brick.colorType == colorType)
                {
                     count++;
                }
@@ -126,7 +125,7 @@ public class Stage : MonoBehaviour
      }
      private IEnumerator AfterDespawn(PlatformBrick brick)
      {
-          yield return new WaitForSeconds(3f);
+          yield return new WaitForSeconds(Constants.TimeToRespawnPlatformBrick);
           _listNoneBrickPos.Add(brick.transform.position);
           SpawnBrickRandPos(GetRandomColorValid());
      }

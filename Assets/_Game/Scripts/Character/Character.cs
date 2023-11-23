@@ -1,51 +1,77 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : ObjectColor
 {
     [Header("Components")]
-    [SerializeField] protected Rigidbody rb;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask stairLayer;
     [SerializeField] protected Animator anim;
-    [SerializeField] protected SkinnedMeshRenderer skinnedMesh;
     [SerializeField] protected Transform model;
     
     [Header("Properties")]
     [SerializeField] protected float moveSpeed;
-    [SerializeField] protected ColorData colorData;
-    [SerializeField] protected ColorType colorType;
     [SerializeField] protected Transform brickHolder;
-    
+
+    protected bool isFalling = false;
     protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
-    
     protected string currentAnimName;
     public int BrickAmount => bricks.Count;
-    public ColorType ColorType => colorType;
+
+    [HideInInspector] public int currentStageId;
 
     protected void Start()
     {
         OnInit();
     }
-    protected void LateUpdate()
-    {
-        RotateTowardMoveDirection();
-    }
+
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Character"))
+        if (other.CompareTag("Gate"))
         {
-            OnTriggerCharacter(other);
+            GateOut gateOut = other.GetComponent<GateOut>();
+            
+            if (gateOut.StageId == currentStageId)
+            {
+                TF.position = TF.position;
+            }
+            else
+            {
+                
+            }
         }
     }
-    protected virtual void OnInit()
+
+    protected override void OnInit()
     {
-        ChangeColor(colorType);
+        base.OnInit();
+        ChangeAnim(CharacterAnimName.Idle);
     }
-    protected virtual void OnTriggerCharacter(Collider other) { }
     protected virtual void Move() { }
+    protected void RotateTowardMoveDirection(Vector3 nextPoint)
+    {
+        Vector3 direction = nextPoint - transform.position;
+        direction.y = 0;
+        model.forward = direction;
+    }
+    private Vector3 GetNextBrickPos()
+    {
+        if(BrickAmount == 0)
+        {
+            return Vector3.zero;
+        }
+        
+        return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
+    }
+    private void OvercomeGate()
+    {
+        
+    }
     protected void ChangeAnim(string animName)
     {
         if (currentAnimName == animName)
@@ -56,22 +82,6 @@ public abstract class Character : MonoBehaviour
         anim.ResetTrigger(animName);
         currentAnimName = animName;
         anim.SetTrigger(animName);
-    }
-    protected void RotateTowardMoveDirection()
-    {
-        if (rb.velocity == Vector3.zero)
-        {
-            return;
-        }
-        
-        Vector3 targetRotation = rb.velocity;
-        targetRotation.y = 0;
-        model.rotation = Quaternion.LookRotation(targetRotation);
-    }
-    protected void ChangeColor(ColorType colorType)
-    {
-        this.colorType = colorType;
-        skinnedMesh.material = colorData.GetMaterial(colorType);
     }
     public void AddBrick()
     {
@@ -92,16 +102,41 @@ public abstract class Character : MonoBehaviour
     {
         while (BrickAmount > 0)
         {
-            
+            // TODO: complete this
         }
     }
-    public Vector3 GetNextBrickPos()
+    public Vector3 CheckGround(Vector3 nextPoint)
     {
-        if(BrickAmount == 0)
+        RaycastHit hit;
+
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
         {
-            return Vector3.zero;
+            return hit.point + Vector3.up;
         }
-        
-        return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickHeight * 1.2f;
+
+        return transform.position;
+    }
+    public bool CanMove(Vector3 nextPoint)
+    {
+        bool isCanMove = true;
+        RaycastHit hit;
+
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, stairLayer))
+        {
+            BrigdeBrick brigdeBrick = hit.collider.GetComponent<BrigdeBrick>();
+
+            if (brigdeBrick.colorType != colorType && BrickAmount > 0)
+            {
+                brigdeBrick.ChangeColor(colorType);
+                RemoveBrick();
+            }
+
+            if (brigdeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+            {
+                isCanMove = false;
+            }
+        }
+
+        return isCanMove;
     }
 }

@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.25, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 0.3, z: 2}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!114 &4178693152097059302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 1
-  meshRenderer: {fileID: 2946887620462613389}
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
-  colorType: 0
+  renderer: {fileID: 2946887620462613389}
+  colorType: 1
 --- !u!1 &7934202604379393017
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Utils
 {
     public static class Constants
@@ -6,7 +8,8 @@ namespace Utils
         public const float MinSwipeDistance = 0.1f;
         
         // Brick
-        public const float BridgeBrickHeight = 0.3f;
-        public const float CharacterBrickHeight = 0.2f;
+        public static readonly Vector3 BridgeBrickSize = new Vector3(2f,0.3f,2f);
+        public static readonly Vector3 CharacterBrickSize = new Vector3(0.75f,0.2f,0.3f);
+        public const float TimeToRespawnPlatformBrick = 5f;
     }
 }

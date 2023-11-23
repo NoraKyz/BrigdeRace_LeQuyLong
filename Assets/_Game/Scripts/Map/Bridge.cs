@@ -2,19 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public class Bridge : MonoBehaviour
 {
-    [SerializeField] private int bridgeLength;
+    [Header("Config")]
+    [SerializeField] private int bridgeCount;
     [SerializeField] private List<BrigdeBrick> listBricks = new List<BrigdeBrick>();
-    [SerializeField] private Vector3 offset;
+    [SerializeField] private Vector3 brickOffset;
+    
+    [Header("Components")]
+    [SerializeField] private Transform slope;
+    [SerializeField] private Transform gateOut;
+    [SerializeField] private Transform rope;
+    [SerializeField] private Transform planeGateOut;
+    
 
     private Vector3 _spawnPos;
+    private static readonly Vector3 BridgeBrickSize = Constants.BridgeBrickSize;
 
     private void Awake()
     {
-        offset.y = Constants.BridgeBrickHeight;
+        brickOffset.y = BridgeBrickSize.y;
     }
 
     private void Start()
@@ -25,18 +35,46 @@ public class Bridge : MonoBehaviour
     private void OnInit()
     {
         SpawnBridge();
+        
+        SetSlope();
+        
+        SetGateOut();
+
+        SetRope();
     }
 
     private void SpawnBridge()
     {
-        Vector3 cachePos = transform.position;
-        for(int i = 0; i < bridgeLength; i++)
+        Vector3 cachePos;
+        for(int i = 0; i < bridgeCount; i++)
         {
-            _spawnPos.Set(cachePos.x + offset.x * i, cachePos.y + offset.y * i, cachePos.z + offset.z * i);
+            _spawnPos.Set(0, brickOffset.y * i, brickOffset.z * i + BridgeBrickSize.z / 2);
             BrigdeBrick brick = SimplePool.Spawn<BrigdeBrick>(PoolType.BrigdeBrick, _spawnPos, Quaternion.identity, transform);
             
-            brick.ChangeColor(ColorType.Blue);
             listBricks.Add(brick);
         }
+    }
+
+    private void SetSlope()
+    {
+        slope.localScale = new Vector3(0.2f, 1, 0.067f * bridgeCount);
+        
+        float slopeAngle = -Mathf.Atan(BridgeBrickSize.y / brickOffset.z);
+        slope.localRotation = Quaternion.Euler(slopeAngle * Mathf.Rad2Deg, 0, 0);
+        
+        float slopeLength = Mathf.Sqrt(BridgeBrickSize.y * BridgeBrickSize.y + brickOffset.z * brickOffset.z) * bridgeCount;
+        slope.localPosition = new Vector3(0, -slopeLength / 2 * Mathf.Sin(slopeAngle), slopeLength / 2 * Mathf.Cos(slopeAngle));
+    }
+    
+    private void SetGateOut()
+    {
+        gateOut.localPosition = new Vector3(0, brickOffset.y * bridgeCount, brickOffset.z * bridgeCount + BridgeBrickSize.z - brickOffset.z);
+
+        planeGateOut.localPosition = gateOut.localPosition;
+    }
+
+    private void SetRope()
+    {
+        // TODO: complete code
     }
 }

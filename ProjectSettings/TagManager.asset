@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Character
   - Brick
+  - PickUpRange
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Stair

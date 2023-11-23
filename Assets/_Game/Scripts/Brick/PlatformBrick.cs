@@ -12,7 +12,7 @@ public class PlatformBrick : Brick
         {
             Character character = other.GetComponent<Character>();
 
-            if (character.ColorType == colorType)
+            if (character.colorType == colorType)
             {
                 character.AddBrick();
                 OnDespawn();
