@@ -14,7 +14,6 @@ public class Bridge : MonoBehaviour
     
     [Header("Components")]
     [SerializeField] private Transform slope;
-    [SerializeField] private Transform gateOut;
     [SerializeField] private Transform rope;
     [SerializeField] private Transform planeGateOut;
     
@@ -38,8 +37,6 @@ public class Bridge : MonoBehaviour
         
         SetSlope();
         
-        SetGateOut();
-
         SetRope();
     }
 
@@ -64,13 +61,6 @@ public class Bridge : MonoBehaviour
         
         float slopeLength = Mathf.Sqrt(BridgeBrickSize.y * BridgeBrickSize.y + brickOffset.z * brickOffset.z) * bridgeCount;
         slope.localPosition = new Vector3(0, -slopeLength / 2 * Mathf.Sin(slopeAngle), slopeLength / 2 * Mathf.Cos(slopeAngle));
-    }
-    
-    private void SetGateOut()
-    {
-        gateOut.localPosition = new Vector3(0, brickOffset.y * bridgeCount, brickOffset.z * bridgeCount + BridgeBrickSize.z - brickOffset.z);
-
-        planeGateOut.localPosition = gateOut.localPosition;
     }
 
     private void SetRope()
