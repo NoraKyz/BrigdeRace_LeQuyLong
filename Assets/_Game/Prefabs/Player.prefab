@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 7522833371574376757}
   - component: {fileID: 6988551790252266595}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Player
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -340,6 +340,9 @@ MonoBehaviour:
   stairLayer:
     serializedVersion: 2
     m_Bits: 64
+  gateLayer:
+    serializedVersion: 2
+    m_Bits: 128
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
   moveSpeed: 6

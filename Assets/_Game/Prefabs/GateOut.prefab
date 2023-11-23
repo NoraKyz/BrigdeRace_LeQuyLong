@@ -177,10 +177,9 @@ GameObject:
   - component: {fileID: 5769533506764686320}
   - component: {fileID: 689779471}
   - component: {fileID: 4990786841674844713}
-  - component: {fileID: 2281895496858420858}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GateOut
-  m_TagString: Gate
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,7 +213,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 0.2}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0.5}
 --- !u!114 &4990786841674844713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,16 +227,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageId: 1
---- !u!114 &2281895496858420858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5769533506764686323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 981543db742f5364fb7df9f4240ef385, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stageId: 0

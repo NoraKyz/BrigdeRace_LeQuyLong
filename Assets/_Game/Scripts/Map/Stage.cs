@@ -64,13 +64,6 @@ public class Stage : MonoBehaviour
           _listBricks.Add(brick);
           _listNoneBrickPos.Remove(pos);
      }
-     private void SpawnFullBrickByColor(ColorType colorType)
-     {
-          while(!IsMaxBrickByColor(colorType) && HasPosValid)
-          {
-               SpawnBrickRandPos(colorType);
-          }
-     }
      private ColorType GetRandomColorValid()
      {
           while (true)
@@ -128,5 +121,12 @@ public class Stage : MonoBehaviour
           yield return new WaitForSeconds(Constants.TimeToRespawnPlatformBrick);
           _listNoneBrickPos.Add(brick.transform.position);
           SpawnBrickRandPos(GetRandomColorValid());
+     }
+     public void SpawnFullBrickByColor(ColorType colorType)
+     {
+          while(!IsMaxBrickByColor(colorType) && HasPosValid)
+          {
+               SpawnBrickRandPos(colorType);
+          }
      }
 }

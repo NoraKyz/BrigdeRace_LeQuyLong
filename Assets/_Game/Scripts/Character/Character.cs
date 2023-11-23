@@ -11,6 +11,7 @@ public abstract class Character : ObjectColor
     [Header("Components")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask stairLayer;
+    [SerializeField] private LayerMask gateLayer;
     [SerializeField] protected Animator anim;
     [SerializeField] protected Transform model;
     
@@ -28,23 +29,6 @@ public abstract class Character : ObjectColor
     protected void Start()
     {
         OnInit();
-    }
-
-    protected void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Gate"))
-        {
-            GateOut gateOut = other.GetComponent<GateOut>();
-            
-            if (gateOut.StageId == currentStageId)
-            {
-                TF.position = TF.position;
-            }
-            else
-            {
-                
-            }
-        }
     }
 
     protected override void OnInit()
@@ -68,9 +52,17 @@ public abstract class Character : ObjectColor
         
         return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
     }
-    private void OvercomeGate()
+    protected IEnumerator LerpPosition(Vector3 targetPosition, float duration)
     {
-        
+        float time = 0;
+        Vector3 startPosition = transform.position;
+        while (time < duration)
+        {
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            time += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
     }
     protected void ChangeAnim(string animName)
     {
@@ -132,6 +124,21 @@ public abstract class Character : ObjectColor
             }
 
             if (brigdeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+            {
+                isCanMove = false;
+            }
+        }
+        
+        if (Physics.Raycast(nextPoint, Vector3.forward, out hit, 1f, gateLayer))
+        {
+            GateOut gateOut = hit.collider.GetComponent<GateOut>();
+
+            if (gateOut.StageId != currentStageId)
+            {
+                currentStageId = gateOut.StageId;
+                StartCoroutine(LerpPosition(TF.position + Vector3.forward, 0.2f));
+            }
+            else
             {
                 isCanMove = false;
             }

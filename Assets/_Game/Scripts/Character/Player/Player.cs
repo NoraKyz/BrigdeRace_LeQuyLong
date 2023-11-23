@@ -26,7 +26,7 @@ public class Player : Character
         
         if (_inputDirection != Vector3.zero)
         {
-            Vector3 nextPoint = transform.position + _inputDirection * moveSpeed * Time.deltaTime;
+            Vector3 nextPoint = transform.position + _inputDirection.normalized * moveSpeed * Time.deltaTime;
             
             RotateTowardMoveDirection(nextPoint);
             
