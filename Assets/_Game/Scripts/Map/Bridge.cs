@@ -15,7 +15,6 @@ public class Bridge : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Transform slope;
     [SerializeField] private Transform rope;
-    [SerializeField] private Transform planeGateOut;
     
 
     private Vector3 _spawnPos;
@@ -42,12 +41,11 @@ public class Bridge : MonoBehaviour
 
     private void SpawnBridge()
     {
-        Vector3 cachePos;
         for(int i = 0; i < bridgeCount; i++)
         {
             _spawnPos.Set(0, brickOffset.y * i, brickOffset.z * i + BridgeBrickSize.z / 2);
-            BrigdeBrick brick = SimplePool.Spawn<BrigdeBrick>(PoolType.BrigdeBrick, _spawnPos, Quaternion.identity, transform);
             
+            BrigdeBrick brick = SimplePool.Spawn<BrigdeBrick>(PoolType.BrigdeBrick, _spawnPos, Quaternion.identity, transform);
             listBricks.Add(brick);
         }
     }

@@ -8,10 +8,12 @@ using Utils;
 
 public abstract class Character : ObjectColor
 {
-    [Header("Components")]
+    [Header("Layer")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask stairLayer;
     [SerializeField] private LayerMask gateLayer;
+    
+    [Header("Components")]
     [SerializeField] protected Animator anim;
     [SerializeField] protected Transform model;
     
@@ -22,15 +24,14 @@ public abstract class Character : ObjectColor
     protected bool isFalling = false;
     protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
     protected string currentAnimName;
+    
+    //public event Action OnMovePositionComplete;
     public int BrickAmount => bricks.Count;
-
-    [HideInInspector] public int currentStageId;
-
+    public int CurrentStageId { get; private set; }
     protected void Start()
     {
         OnInit();
     }
-
     protected override void OnInit()
     {
         base.OnInit();
@@ -43,7 +44,7 @@ public abstract class Character : ObjectColor
         direction.y = 0;
         model.forward = direction;
     }
-    private Vector3 GetNextBrickPos()
+    private Vector3 GetNextBrickPosInHolder()
     {
         if(BrickAmount == 0)
         {
@@ -51,18 +52,6 @@ public abstract class Character : ObjectColor
         }
         
         return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
-    }
-    protected IEnumerator LerpPosition(Vector3 targetPosition, float duration)
-    {
-        float time = 0;
-        Vector3 startPosition = transform.position;
-        while (time < duration)
-        {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = targetPosition;
     }
     protected void ChangeAnim(string animName)
     {
@@ -75,11 +64,69 @@ public abstract class Character : ObjectColor
         currentAnimName = animName;
         anim.SetTrigger(animName);
     }
+    protected Vector3 CheckGround(Vector3 nextPoint)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
+        {
+            return hit.point + Vector3.up;
+        }
+
+        return transform.position;
+    }
+    protected bool CanMove(Vector3 nextPoint)
+    {
+        return CheckStair(nextPoint) && CheckGate(nextPoint); 
+    }
+    private bool CheckStair(Vector3 nextPoint)
+    {
+        RaycastHit hit;
+        
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, stairLayer))
+        {
+            BrigdeBrick brigdeBrick = hit.collider.GetComponent<BrigdeBrick>();
+
+            if (brigdeBrick.colorType != colorType && BrickAmount > 0)
+            {
+                brigdeBrick.ChangeColor(colorType);
+                RemoveBrick();
+            }
+
+            if (brigdeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private bool CheckGate(Vector3 nextPoint)
+    {
+        RaycastHit hit;
+        
+        if (Physics.Raycast(nextPoint, (nextPoint - transform.position).normalized, out hit, 1f, gateLayer))
+        {
+            GateIn gateIn = hit.collider.GetComponent<GateIn>();
+
+            if (gateIn.StageId != CurrentStageId)
+            {
+                CurrentStageId = gateIn.StageId;
+                StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
     public void AddBrick()
     {
         CharacterBrick brick = SimplePool.Spawn<CharacterBrick>(
             PoolType.CharacterBrick, 
-            GetNextBrickPos(),
+            GetNextBrickPosInHolder(),
             Quaternion.identity, 
             brickHolder
         );
@@ -97,53 +144,23 @@ public abstract class Character : ObjectColor
             // TODO: complete this
         }
     }
-    public Vector3 CheckGround(Vector3 nextPoint)
+    public void OnWin()
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
-        {
-            return hit.point + Vector3.up;
-        }
-
-        return transform.position;
+        ChangeAnim(CharacterAnimName.Win);
     }
-    public bool CanMove(Vector3 nextPoint)
+    public IEnumerator MovePosition(Vector3 targetPosition, float duration)
     {
-        bool isCanMove = true;
-        RaycastHit hit;
-
-        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, stairLayer))
+        float time = 0;
+        Vector3 startPosition = transform.position;
+        while (time < duration)
         {
-            BrigdeBrick brigdeBrick = hit.collider.GetComponent<BrigdeBrick>();
-
-            if (brigdeBrick.colorType != colorType && BrickAmount > 0)
-            {
-                brigdeBrick.ChangeColor(colorType);
-                RemoveBrick();
-            }
-
-            if (brigdeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
-            {
-                isCanMove = false;
-            }
+            transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+            ChangeAnim(CharacterAnimName.Run);
+            time += Time.deltaTime;
+            yield return null;
         }
         
-        if (Physics.Raycast(nextPoint, (nextPoint - transform.position).normalized, out hit, 1f, gateLayer))
-        {
-            GateOut gateOut = hit.collider.GetComponent<GateOut>();
-
-            if (gateOut.StageId != currentStageId)
-            {
-                currentStageId = gateOut.StageId;
-                StartCoroutine(LerpPosition(TF.position + Vector3.forward, 0.2f));
-            }
-            else
-            {
-                isCanMove = false;
-            }
-        }
-
-        return isCanMove;
+        transform.position = targetPosition;
+        ChangeAnim(CharacterAnimName.Idle);
     }
 }

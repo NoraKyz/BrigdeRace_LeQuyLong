@@ -5,6 +5,7 @@ namespace _Game.Utils
 {
     public class ObjectColor : GameUnit
     {
+        [Header("Config Color")]
         [SerializeField] private ColorData colorData;
         [SerializeField] private Renderer renderer;
         

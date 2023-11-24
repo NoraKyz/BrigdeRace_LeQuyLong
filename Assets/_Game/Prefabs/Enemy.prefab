@@ -294,9 +294,9 @@ GameObject:
   - component: {fileID: 4342106648904138705}
   - component: {fileID: 7522833371574376757}
   - component: {fileID: 6988551790252266595}
-  - component: {fileID: 4342106648904138704}
+  - component: {fileID: 4200976269123691237}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Enemy
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -347,7 +347,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4342106648904138704
+--- !u!114 &4200976269123691237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,27 +356,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342106648904138543}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd67e2a13153e584bbce9d7540290376, type: 3}
+  m_Script: {fileID: 11500000, guid: bd092b610e66ce84ba7819e93f8d4bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5183748451990090374}
-  colorType: 1
+  colorType: 3
   groundLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   stairLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   gateLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
-  moveSpeed: 6
+  moveSpeed: 4
   brickHolder: {fileID: 4342106647374914131}
-  joystick: {fileID: 0}
 --- !u!1 &4434858497945783070
 GameObject:
   m_ObjectHideFlags: 0
