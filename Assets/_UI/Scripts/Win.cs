@@ -9,7 +9,7 @@ public class Win : UICanvas
 
     public void MainMenuButton()
     {
-        UIManager.Ins.OpenUI<MianMenu>();
+        UIManager.Instance.OpenUI<MianMenu>();
         Close(0);
     }
 }

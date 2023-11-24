@@ -1,4 +1,4 @@
-﻿namespace _Game.Pattern.StateMachine
+﻿namespace _Game.Framework.StateMachine
 {
     public class MoveToFinishPointState: IState<Enemy>
     {

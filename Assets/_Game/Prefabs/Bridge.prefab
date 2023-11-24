@@ -51,7 +51,6 @@ MonoBehaviour:
   brickOffset: {x: 0, y: 0.5, z: 0.6}
   slope: {fileID: 2619014141741386550}
   rope: {fileID: 2824242769951526098}
-  planeGateOut: {fileID: 0}
 --- !u!1 &6720925109280664579
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +100,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6720925109280664579}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

@@ -10,6 +10,12 @@ namespace Utils
         // Brick
         public static readonly Vector3 BridgeBrickSize = new Vector3(2f,0.3f,2f);
         public static readonly Vector3 CharacterBrickSize = new Vector3(0.75f,0.2f,0.3f);
-        public const float TimeToRespawnPlatformBrick = 5f;
+        public const float RespawnPlatformBrickTime = 5f;
+        
+        // Character
+        public const float StunTime = 1f;
+        
+        // Game play
+        public const float TimeToStartGame = 3f;
     }
 }

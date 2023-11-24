@@ -118,15 +118,29 @@ public class Stage : MonoBehaviour
      }
      private IEnumerator AfterDespawn(PlatformBrick brick)
      {
-          yield return new WaitForSeconds(Constants.TimeToRespawnPlatformBrick);
+          yield return new WaitForSeconds(Constants.RespawnPlatformBrickTime);
           _listNoneBrickPos.Add(brick.transform.position);
           SpawnBrickRandPos(GetRandomColorValid());
      }
-     public void SpawnFullBrickByColor(ColorType colorType)
+     private void SpawnFullBrickByColor(ColorType colorType)
      {
           while(!IsMaxBrickByColor(colorType) && HasPosValid)
           {
                SpawnBrickRandPos(colorType);
           }
+     }
+     public List<Vector3> GetListPosBrickTakeable(ColorType colorType)
+     {
+          List<Vector3> listPos = new List<Vector3>();
+          
+          foreach (var brick in _listBricks)
+          {
+               if (brick.colorType == colorType)
+               {
+                    listPos.Add(brick.transform.position);
+               }
+          }
+
+          return listPos;
      }
 }

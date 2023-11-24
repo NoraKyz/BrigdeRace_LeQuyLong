@@ -5,6 +5,7 @@ public class Player : Character
 {
     [Header("Controller")] 
     [SerializeField] private FloatingJoystick joystick;
+    [SerializeField] protected float moveSpeed;
     
     private Vector3 _inputDirection;
     

@@ -1,27 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
+using _Game.Framework.StateMachine;
 using _Game.Pattern.StateMachine;
+using _Game.Utils;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Events;
+
 public class Enemy : Character
 {
-    private IState<Enemy> _currentState;
+    [Header("Components")]
+    [SerializeField] private NavMeshAgent navMeshAgent;
     
-    private IdleState _idleState;
-    private CollectState _collectState;
-    private MoveToFinishPointState _moveToFinishPointState;
-    private FallState _fallState;
+    [Header("Config")] 
+    [SerializeField] public BotConfig botConfig;
+    
+    [Header("Properties")]
+    [SerializeField] private Transform finishPoint;
+    [SerializeField] private Stage currentStage;
+    
+    private IState<Enemy> _currentState;
+    private List<Vector3> _listBrickPos = new List<Vector3>();
+    public BotConfig BotConfig => botConfig;
+    public IdleState IdleState { get; private set; }
+    public CollectState CollectState { get; private set; }
+    public MoveToFinishPointState MoveToFinishPointState { get; private set; }
+    public FallState FallState { get; private set; }
+
     private void Awake()
     {
-        _idleState = new IdleState();
-        _collectState = new CollectState();
-        _moveToFinishPointState = new MoveToFinishPointState();
-        _fallState = new FallState();
+        IdleState = new IdleState();
+        CollectState = new CollectState();
+        MoveToFinishPointState = new MoveToFinishPointState();
+        FallState = new FallState();
     }
-
     protected override void OnInit()
     {
         base.OnInit();
-        ChangeState(_idleState);
+        
+        navMeshAgent.speed = botConfig.moveSpeed; 
+        ChangeState(IdleState);
     }
-
     void Update()
     {
         if (_currentState != null)
@@ -29,7 +48,6 @@ public class Enemy : Character
             _currentState.OnExecute(this);
         }
     }
-
     public void ChangeState(IState<Enemy> state)
     {
         if (_currentState != null)
@@ -44,7 +62,19 @@ public class Enemy : Character
             _currentState.OnEnter(this);
         }
     }
-
+    public void MoveToPosition(Vector3 position)
+    {
+        navMeshAgent.enabled = true;
+        navMeshAgent.SetDestination(position);
+    }
+    public void StopMove()
+    {
+        navMeshAgent.enabled = false;
+    }
+    public void UpdateListBrickPos()
+    {
+        _listBrickPos = currentStage.GetListPosBrickTakeable(colorType);
+    }
 }
 
 

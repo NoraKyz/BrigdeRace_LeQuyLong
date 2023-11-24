@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Framework.Debug;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 
-public abstract class Character : ObjectColor
+public class Character : ObjectColor
 {
     [Header("Layer")]
     [SerializeField] private LayerMask groundLayer;
@@ -18,7 +19,6 @@ public abstract class Character : ObjectColor
     [SerializeField] protected Transform model;
     
     [Header("Properties")]
-    [SerializeField] protected float moveSpeed;
     [SerializeField] protected Transform brickHolder;
 
     protected bool isFalling = false;
@@ -53,32 +53,6 @@ public abstract class Character : ObjectColor
         
         return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
     }
-    protected void ChangeAnim(string animName)
-    {
-        if (currentAnimName == animName)
-        {
-            return;
-        }
-        
-        anim.ResetTrigger(animName);
-        currentAnimName = animName;
-        anim.SetTrigger(animName);
-    }
-    protected Vector3 CheckGround(Vector3 nextPoint)
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
-        {
-            return hit.point + Vector3.up;
-        }
-
-        return transform.position;
-    }
-    protected bool CanMove(Vector3 nextPoint)
-    {
-        return CheckStair(nextPoint) && CheckGate(nextPoint); 
-    }
     private bool CheckStair(Vector3 nextPoint)
     {
         RaycastHit hit;
@@ -111,8 +85,7 @@ public abstract class Character : ObjectColor
 
             if (gateIn.StageId != CurrentStageId)
             {
-                CurrentStageId = gateIn.StageId;
-                StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
+                OnNextStage(gateIn);
             }
             else
             {
@@ -122,7 +95,38 @@ public abstract class Character : ObjectColor
         
         return true;
     }
-    public void AddBrick()
+    protected Vector3 CheckGround(Vector3 nextPoint)
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
+        {
+            return hit.point + Vector3.up;
+        }
+
+        return transform.position;
+    }
+    protected bool CanMove(Vector3 nextPoint)
+    {
+        return CheckStair(nextPoint) && CheckGate(nextPoint); 
+    }
+    protected virtual void OnNextStage(GateIn gateIn)
+    {
+        CurrentStageId = gateIn.StageId;
+        StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
+    }
+    public void ChangeAnim(string animName)
+    {
+        if (currentAnimName == animName)
+        {
+            return;
+        }
+        
+        anim.ResetTrigger(animName);
+        currentAnimName = animName;
+        anim.SetTrigger(animName);
+    }
+    public virtual void AddBrick()
     {
         CharacterBrick brick = SimplePool.Spawn<CharacterBrick>(
             PoolType.CharacterBrick, 
@@ -133,18 +137,18 @@ public abstract class Character : ObjectColor
         brick.ChangeColor(colorType);
         bricks.Push(brick);
     }
-    public void RemoveBrick()
+    public virtual void RemoveBrick()
     {
         SimplePool.Despawn(bricks.Pop());
     }
-    public void DropBrick()
+    public virtual void DropBrick()
     {
         while (BrickAmount > 0)
         {
             // TODO: complete this
         }
     }
-    public void OnWin()
+    public virtual void OnWin()
     {
         ChangeAnim(CharacterAnimName.Win);
     }
@@ -152,15 +156,14 @@ public abstract class Character : ObjectColor
     {
         float time = 0;
         Vector3 startPosition = transform.position;
+        
         while (time < duration)
         {
             transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
-            ChangeAnim(CharacterAnimName.Run);
             time += Time.deltaTime;
             yield return null;
         }
         
         transform.position = targetPosition;
-        ChangeAnim(CharacterAnimName.Idle);
     }
 }

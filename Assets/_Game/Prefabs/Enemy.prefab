@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 4342106648904138705}
   - component: {fileID: 7522833371574376757}
   - component: {fileID: 6988551790252266595}
+  - component: {fileID: 2086161863803518409}
   - component: {fileID: 4200976269123691237}
   m_Layer: 0
   m_Name: Enemy
@@ -347,6 +348,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &2086161863803518409
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342106648904138543}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 4
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 180
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &4200976269123691237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,17 +388,19 @@ MonoBehaviour:
   colorType: 3
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   stairLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   gateLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
-  moveSpeed: 4
+  moveSpeed: 6
   brickHolder: {fileID: 4342106647374914131}
+  navMeshAgent: {fileID: 2086161863803518409}
+  finishPoint: {fileID: 0}
 --- !u!1 &4434858497945783070
 GameObject:
   m_ObjectHideFlags: 0

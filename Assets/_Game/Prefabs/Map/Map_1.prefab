@@ -394,7 +394,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 4671154678911644501}
-  colorType: 1
+  colorType: 7
 --- !u!1 &273725585601791809
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8622397673974665467}
-  colorType: 1
+  colorType: 7
 --- !u!1 &317850233414929338
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3524847628260514739}
-  colorType: 1
+  colorType: 7
 --- !u!1 &412071994008960056
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5699924819585637638}
-  colorType: 1
+  colorType: 7
 --- !u!1 &459158789317541779
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5940909063248854180}
-  colorType: 1
+  colorType: 7
 --- !u!1 &462209638748090126
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1438233540300447995}
-  colorType: 1
+  colorType: 7
 --- !u!1 &542349212235130686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1300,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8515603802732399849}
-  colorType: 1
+  colorType: 7
 --- !u!1 &636956609880300218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,7 +1612,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7851689499871737617}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1008275984328936248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1758,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2427677477743398525}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1144340915159867073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,7 +1904,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 375875419198546262}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1278584685430297676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2050,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3702486948132187541}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1335502515742192477
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2113,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 662339001769157508}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1347924677541460204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2176,7 +2176,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7163522306429133301}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1351852446424746530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5131333141029949880}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1464167503018807466
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,7 +2385,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6975135898042813678}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1483556421449529708
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,7 +2435,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483556421449529708}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2629,7 +2629,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2806781268454637744}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1520152704288144403
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2775,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7198012528040243649}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1587358644468025598
 GameObject:
   m_ObjectHideFlags: 0
@@ -2838,7 +2838,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6167459175022566985}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1623339160895616204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,7 +2984,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7625412483484020753}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1759430637628668769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,7 +3244,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8769281564646038029}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1861452030168333075
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,7 +3307,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5367247149777475472}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1922620412333720676
 GameObject:
   m_ObjectHideFlags: 0
@@ -3370,7 +3370,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7457232193197458754}
-  colorType: 1
+  colorType: 7
 --- !u!1 &1943392817787432253
 GameObject:
   m_ObjectHideFlags: 0
@@ -3433,7 +3433,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3815858207990195041}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2052845768969354528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,7 +3549,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 716106429107110616}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2123153839478832391
 GameObject:
   m_ObjectHideFlags: 0
@@ -3695,7 +3695,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5358891687250474878}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2210308095884973145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3841,7 +3841,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2722191031208167298}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2299659902991053527
 GameObject:
   m_ObjectHideFlags: 0
@@ -3974,7 +3974,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2310117621082414143}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4072,7 +4072,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2390923488419614651}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4183,7 +4183,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6991916939122862287}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2434220763320401581
 GameObject:
   m_ObjectHideFlags: 0
@@ -4329,7 +4329,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7299635086933842978}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2477035926979979737
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,7 +4641,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 799940356726598772}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2720797304566769351
 GameObject:
   m_ObjectHideFlags: 0
@@ -4968,7 +4968,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 447311229466718940}
-  colorType: 1
+  colorType: 7
 --- !u!1 &2911806160228959447
 GameObject:
   m_ObjectHideFlags: 0
@@ -5280,7 +5280,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8664118961357618605}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3113794720881485697
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,7 +5426,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1870186216227323812}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3232625955465268918
 GameObject:
   m_ObjectHideFlags: 0
@@ -5800,7 +5800,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7351221660814588177}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3428006753586608506
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,7 +5895,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7161480502407459719}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3671481233894764201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5958,7 +5958,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7332329444696690290}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3756821116560825971
 GameObject:
   m_ObjectHideFlags: 0
@@ -6021,7 +6021,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8380132888639391187}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3776285198689458448
 GameObject:
   m_ObjectHideFlags: 0
@@ -6167,7 +6167,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2373086162808645327}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3801973954639506916
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,7 +6230,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6644157503368832239}
-  colorType: 1
+  colorType: 7
 --- !u!1 &3840267164445831459
 GameObject:
   m_ObjectHideFlags: 0
@@ -6280,7 +6280,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3840267164445831459}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -6527,7 +6527,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 167527147794332489}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4117947924415898781
 GameObject:
   m_ObjectHideFlags: 0
@@ -6590,7 +6590,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1206526347293597317}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4150323461700985770
 GameObject:
   m_ObjectHideFlags: 0
@@ -6850,7 +6850,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1909273393709402498}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4293709713413183306
 GameObject:
   m_ObjectHideFlags: 0
@@ -6913,7 +6913,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2319322585604638611}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4325233135909771268
 GameObject:
   m_ObjectHideFlags: 0
@@ -7059,7 +7059,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5402771489956124118}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4408075540685318603
 GameObject:
   m_ObjectHideFlags: 0
@@ -7205,7 +7205,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5319405845501307129}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4448608095084870927
 GameObject:
   m_ObjectHideFlags: 0
@@ -7351,7 +7351,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1147655923014214823}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4499688466996497053
 GameObject:
   m_ObjectHideFlags: 0
@@ -7497,7 +7497,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7888427848563511473}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4582896508390527195
 GameObject:
   m_ObjectHideFlags: 0
@@ -7643,7 +7643,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 4669126751261283334}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4628142835231346760
 GameObject:
   m_ObjectHideFlags: 0
@@ -7706,7 +7706,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7497623736722552211}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4716728520550117438
 GameObject:
   m_ObjectHideFlags: 0
@@ -7935,7 +7935,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 457291266329740741}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4955564704202241278
 GameObject:
   m_ObjectHideFlags: 0
@@ -8068,7 +8068,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7286885379477236539}
-  colorType: 1
+  colorType: 7
 --- !u!1 &4994667756822302840
 GameObject:
   m_ObjectHideFlags: 0
@@ -8795,7 +8795,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 4441411105628056843}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5321446184058058341
 GameObject:
   m_ObjectHideFlags: 0
@@ -9086,7 +9086,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 365308008308203766}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5508124968897631736
 GameObject:
   m_ObjectHideFlags: 0
@@ -9149,7 +9149,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6484698676910120203}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5648320718161425994
 GameObject:
   m_ObjectHideFlags: 0
@@ -9295,7 +9295,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8854394489383282243}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5742607008283232171
 GameObject:
   m_ObjectHideFlags: 0
@@ -9358,7 +9358,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2418746059576493403}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5745501952277414344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9587,7 +9587,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3275964062900500658}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5897989077922527408
 GameObject:
   m_ObjectHideFlags: 0
@@ -9650,7 +9650,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8515976850003679258}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5901584881390794574
 GameObject:
   m_ObjectHideFlags: 0
@@ -9713,7 +9713,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 492218766845466517}
-  colorType: 1
+  colorType: 7
 --- !u!1 &5936067607769564817
 GameObject:
   m_ObjectHideFlags: 0
@@ -10056,7 +10056,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8748812499412127845}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6378027982466928301
 GameObject:
   m_ObjectHideFlags: 0
@@ -10119,7 +10119,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 4844464785461550708}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6403107465644385125
 GameObject:
   m_ObjectHideFlags: 0
@@ -10440,7 +10440,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8334876234098394978}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6554329254039595703
 GameObject:
   m_ObjectHideFlags: 0
@@ -10503,7 +10503,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3807069623777617991}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6600923037617941935
 GameObject:
   m_ObjectHideFlags: 0
@@ -10566,7 +10566,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5709586234471619750}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6612082708075614616
 GameObject:
   m_ObjectHideFlags: 0
@@ -10629,7 +10629,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7009344407481721518}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6668886032960489788
 GameObject:
   m_ObjectHideFlags: 0
@@ -10762,7 +10762,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6817676237901317276}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11082,7 +11082,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3021806085454629937}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6923688027499255649
 GameObject:
   m_ObjectHideFlags: 0
@@ -11311,7 +11311,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1494620667893008668}
-  colorType: 1
+  colorType: 7
 --- !u!1 &6979532420480002650
 GameObject:
   m_ObjectHideFlags: 0
@@ -11457,7 +11457,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6918811752990482498}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7025517739198976860
 GameObject:
   m_ObjectHideFlags: 0
@@ -11769,7 +11769,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 1173752120974798720}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7308832244063105519
 GameObject:
   m_ObjectHideFlags: 0
@@ -11832,7 +11832,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8133709132876970268}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7395726287292605919
 GameObject:
   m_ObjectHideFlags: 0
@@ -11978,7 +11978,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 4688831439669907844}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7765314328098685789
 GameObject:
   m_ObjectHideFlags: 0
@@ -12124,7 +12124,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3406521981379420626}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7821766184270102224
 GameObject:
   m_ObjectHideFlags: 0
@@ -12291,6 +12291,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7860648680326419275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5561937949108669115}
+  m_Layer: 0
+  m_Name: FinishPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5561937949108669115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7860648680326419275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 10.5, z: 69.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9021425507068048129}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7912004199160985790
 GameObject:
   m_ObjectHideFlags: 0
@@ -12353,7 +12384,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5494055023051362092}
-  colorType: 1
+  colorType: 7
 --- !u!1 &7992483330365428447
 GameObject:
   m_ObjectHideFlags: 0
@@ -12665,7 +12696,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7359581250504571057}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8276539120844453263
 GameObject:
   m_ObjectHideFlags: 0
@@ -12728,7 +12759,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5213140678322063033}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8299576729422829933
 GameObject:
   m_ObjectHideFlags: 0
@@ -12791,7 +12822,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 6536297062681600885}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8304394895151838310
 GameObject:
   m_ObjectHideFlags: 0
@@ -12937,7 +12968,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 8449034096051785054}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8473583029491025734
 GameObject:
   m_ObjectHideFlags: 0
@@ -13166,7 +13197,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 776858656363162102}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8553539067588552313
 GameObject:
   m_ObjectHideFlags: 0
@@ -13229,7 +13260,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 364352086274425500}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8594231494175164749
 GameObject:
   m_ObjectHideFlags: 0
@@ -13292,7 +13323,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 277452623541998857}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8611931562728874123
 GameObject:
   m_ObjectHideFlags: 0
@@ -13342,7 +13373,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8611931562728874123}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -13453,7 +13484,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5036902508420127063}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8716820866270892889
 GameObject:
   m_ObjectHideFlags: 0
@@ -13516,7 +13547,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 3443648523093799810}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8771773475372359043
 GameObject:
   m_ObjectHideFlags: 0
@@ -13579,7 +13610,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 317633237767036069}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8845114018160878324
 GameObject:
   m_ObjectHideFlags: 0
@@ -13642,7 +13673,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2984011116065361527}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8893765181580180405
 GameObject:
   m_ObjectHideFlags: 0
@@ -13819,7 +13850,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7216320581320642744}
-  colorType: 1
+  colorType: 7
 --- !u!1 &8912179960731496516
 GameObject:
   m_ObjectHideFlags: 0
@@ -13995,6 +14026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9021425507068048129}
+  - component: {fileID: 5358033139633775307}
   m_Layer: 0
   m_Name: Map_1
   m_TagString: Untagged
@@ -14018,9 +14050,40 @@ Transform:
   - {fileID: 6403107466825647827}
   - {fileID: 6403107465644385124}
   - {fileID: 6403107467189782037}
+  - {fileID: 5561937949108669115}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5358033139633775307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021425507068048128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.15666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &9021425507101700942
 GameObject:
   m_ObjectHideFlags: 0
@@ -14200,7 +14263,7 @@ MonoBehaviour:
   poolType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7702566674202876735}
-  colorType: 1
+  colorType: 7
 --- !u!1 &9180641501393626311
 GameObject:
   m_ObjectHideFlags: 0
