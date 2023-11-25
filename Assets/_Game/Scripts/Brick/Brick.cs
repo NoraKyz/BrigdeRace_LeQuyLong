@@ -11,7 +11,7 @@ public class Brick : ObjectColor
     {
         OnInit();
     }
-    
+
     protected virtual void OnDespawn()
     {
         SimplePool.Despawn(this);

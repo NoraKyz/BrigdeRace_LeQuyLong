@@ -6,7 +6,7 @@ namespace _Game.Framework.StateMachine
     {
         public void OnEnter(Enemy enemy)
         {
-            
+            enemy.MoveToRandomBrick();
         }
 
         public void OnExecute(Enemy enemy)

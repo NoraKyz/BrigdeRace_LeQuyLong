@@ -20,8 +20,8 @@ public class Character : ObjectColor
     
     [Header("Properties")]
     [SerializeField] protected Transform brickHolder;
-
-    protected bool isFalling = false;
+    
+    [HideInInspector] public bool isFalling = false;
     protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
     protected string currentAnimName;
     
@@ -37,6 +37,18 @@ public class Character : ObjectColor
         base.OnInit();
         ChangeAnim(CharacterAnimName.Idle);
     }
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Character"))
+        {
+            Character character = other.GetComponent<Character>();
+            if(character.BrickAmount > BrickAmount && BrickAmount > 0)
+            {
+                DropBrick();
+            }
+        }
+    }
+
     protected virtual void Move() { }
     protected void RotateTowardMoveDirection(Vector3 nextPoint)
     {
@@ -53,7 +65,7 @@ public class Character : ObjectColor
         
         return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
     }
-    private bool CheckStair(Vector3 nextPoint)
+    public bool CheckStair(Vector3 nextPoint)
     {
         RaycastHit hit;
         
@@ -145,7 +157,8 @@ public class Character : ObjectColor
     {
         while (BrickAmount > 0)
         {
-            // TODO: complete this
+            SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
+            RemoveBrick();
         }
     }
     public virtual void OnWin()

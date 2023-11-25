@@ -10,9 +10,12 @@ public class DropBrick : Brick
         if (other.CompareTag("Character"))
         {
             Character character = other.GetComponent<Character>();
-            character.AddBrick();
 
-            OnDespawn();
+            if (!character.isFalling)
+            {
+                character.AddBrick();
+                OnDespawn();
+            }
         }
     }
 }

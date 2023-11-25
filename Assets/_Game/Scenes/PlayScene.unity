@@ -1152,6 +1152,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1431948079}
     m_Modifications:
     - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
+      propertyPath: m_Speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: m_Height
       value: 1
       objectReference: {fileID: 0}
@@ -1162,6 +1166,14 @@ PrefabInstance:
     - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: m_BaseOffset
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
+      propertyPath: m_Acceleration
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: botConfig

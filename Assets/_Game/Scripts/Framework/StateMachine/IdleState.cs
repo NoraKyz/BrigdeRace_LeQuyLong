@@ -7,7 +7,8 @@ namespace _Game.Framework.StateMachine
     public class IdleState : IState<Enemy>
     {
         private float _timer;
-        private float _idleTime = Constants.TimeToStartGame;
+        private const float _idleTime = Constants.TimeToStartGame;
+
         public void OnEnter(Enemy enemy)
         {
             _timer = 0;

@@ -11,6 +11,8 @@ namespace _Game.Pattern.StateMachine
         public void OnEnter(Enemy enemy)
         {
             _timer = 0;
+            enemy.isFalling = true;
+            enemy.StopMove();
             enemy.ChangeAnim(CharacterAnimName.Fall);
         }
 
@@ -25,7 +27,7 @@ namespace _Game.Pattern.StateMachine
 
         public void OnExit(Enemy enemy)
         {
-            
+            enemy.isFalling = false;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Utils
         public const float RespawnPlatformBrickTime = 5f;
         
         // Character
-        public const float StunTime = 1f;
+        public const float StunTime = 1.5f;
         
         // Game play
         public const float TimeToStartGame = 3f;
