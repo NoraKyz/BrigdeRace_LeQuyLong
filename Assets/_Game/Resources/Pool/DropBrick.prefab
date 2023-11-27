@@ -126,11 +126,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7814090818062663585}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.15, z: 0.25}
-  m_Center: {x: 0, y: 0.075, z: 0}
+  m_Size: {x: 0.75, y: 0.2, z: 0.3}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!54 &4398245956423454719
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -163,3 +163,4 @@ MonoBehaviour:
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 2554621997860101737}
   colorType: 7
+  trigger: {fileID: 2520713814255840156}

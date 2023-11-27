@@ -1153,7 +1153,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: m_Speed
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2086161863803518409, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: m_Height
@@ -1179,6 +1179,10 @@ PrefabInstance:
       propertyPath: botConfig
       value: 
       objectReference: {fileID: 11400000, guid: 5b92425dc21cedc46a8e7b516b9e2899, type: 2}
+    - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: finishPoint
       value: 

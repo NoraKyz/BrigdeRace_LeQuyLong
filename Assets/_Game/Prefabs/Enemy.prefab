@@ -367,7 +367,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4200976269123691237
@@ -398,6 +398,7 @@ MonoBehaviour:
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
   brickHolder: {fileID: 4342106647374914131}
+  isFalling: 0
   navMeshAgent: {fileID: 2086161863803518409}
   botConfig: {fileID: 0}
   finishPoint: {fileID: 0}

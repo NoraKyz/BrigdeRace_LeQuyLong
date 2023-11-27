@@ -21,14 +21,19 @@ public class Enemy : Character
     [SerializeField] private Transform finishPoint;
     [SerializeField] private Stage currentStage;
     
+    private bool _isGoingToFinishPoint = false;
     private IState<Enemy> _currentState;
     private List<Vector3> _listBrickPos = new List<Vector3>();
     public BotConfig BotConfig => botConfig;
-    public Vector3 Veclocity => navMeshAgent.velocity;
+    public Vector3 NextPosition => navMeshAgent.nextPosition;
+
+    #region States
     public IdleState IdleState { get; private set; }
     public CollectState CollectState { get; private set; }
     public MoveToFinishPointState MoveToFinishPointState { get; private set; }
     public FallState FallState { get; private set; }
+
+    #endregion
 
     private void Awake()
     {
@@ -42,10 +47,9 @@ public class Enemy : Character
         base.OnInit();
         
         navMeshAgent.speed = botConfig.moveSpeed;
-        UpdateListBrickPos();
         ChangeState(IdleState);
     }
-    void Update()
+    private void Update()
     {
         if (_currentState != null)
         {
@@ -72,23 +76,32 @@ public class Enemy : Character
         navMeshAgent.SetDestination(position);
         ChangeAnim(CharacterAnimName.Run);
     }
-    public void StopMove()
+    private void AllowMoveToFinishPoint()
     {
-        navMeshAgent.enabled = false;
-        ChangeAnim(CharacterAnimName.Idle);
+        if (_isGoingToFinishPoint)
+        {
+            return;
+        }
+        
+        float random = UnityEngine.Random.Range(0f, 1f);
+        if (random >= 0.9f)
+        {
+            _isGoingToFinishPoint = true;
+            ChangeState(MoveToFinishPointState);
+        }
+        else
+        {
+            MoveToRandomBrick();
+        }
     }
-    private void UpdateListBrickPos()
-    {
-        _listBrickPos = currentStage.GetListPosBrickTakeable(colorType);
-    }
-    
     public void MoveToFinishPos()
     {
         MoveToPosition(finishPoint.position);   
     }
-    
     public void MoveToRandomBrick()
     {
+        _listBrickPos = currentStage.GetListPosBrickTakeable(colorType);
+        
         if (_listBrickPos.Count > 0)
         {
             int randomIndex = UnityEngine.Random.Range(0, _listBrickPos.Count);
@@ -99,27 +112,24 @@ public class Enemy : Character
             ChangeState(MoveToFinishPointState);
         }
     }   
-
     public override void AddBrick()
     {
         base.AddBrick();
-        UpdateListBrickPos();
-        
-        float random = UnityEngine.Random.Range(0f, 1f);
-        if (random >= 0.5f)
-        {
-            ChangeState(MoveToFinishPointState);
-        }
-        else
-        {
-            MoveToRandomBrick();
-        }
+        AllowMoveToFinishPoint();
     }
-
     public override void DropBrick()
     {
         base.DropBrick();
         ChangeState(FallState);
+    }
+    public void StopMove()
+    {
+        navMeshAgent.enabled = false;
+    }
+    public void NotEnoughBrick()
+    {
+        _isGoingToFinishPoint = false;
+        ChangeState(CollectState);
     }
 }
 

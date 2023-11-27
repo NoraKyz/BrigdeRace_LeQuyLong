@@ -7,7 +7,7 @@ namespace _Game.Framework.StateMachine
     public class IdleState : IState<Enemy>
     {
         private float _timer;
-        private const float _idleTime = Constants.TimeToStartGame;
+        private const float IdleTime = Constants.TimeToStartGame;
 
         public void OnEnter(Enemy enemy)
         {
@@ -18,7 +18,7 @@ namespace _Game.Framework.StateMachine
         public void OnExecute(Enemy enemy)
         {
             _timer += Time.deltaTime;
-            if (_timer >= _idleTime)
+            if (_timer >= IdleTime)
             {
                 enemy.ChangeState(enemy.CollectState);
             }

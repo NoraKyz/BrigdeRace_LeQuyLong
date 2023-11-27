@@ -7,11 +7,13 @@ namespace _Game.Pattern.StateMachine
     public class FallState: IState<Enemy>
     {
         private float _timer;
-        private float _stunTime = Constants.StunTime;
+        private const float StunTime = Constants.StunTime;
+        
         public void OnEnter(Enemy enemy)
         {
             _timer = 0;
             enemy.isFalling = true;
+            
             enemy.StopMove();
             enemy.ChangeAnim(CharacterAnimName.Fall);
         }
@@ -19,7 +21,7 @@ namespace _Game.Pattern.StateMachine
         public void OnExecute(Enemy enemy)
         {
             _timer += Time.deltaTime;
-            if (_timer >= _stunTime)
+            if (_timer >= StunTime)
             {
                 enemy.ChangeState(enemy.CollectState);
             }

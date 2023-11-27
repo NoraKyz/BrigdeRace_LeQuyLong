@@ -12,9 +12,9 @@ namespace _Game.Framework.StateMachine
 
         public void OnExecute(Enemy enemy)
         {
-            if (!enemy.CheckStair(enemy.transform.position + enemy.Veclocity * Time.deltaTime))
+            if (!enemy.CheckStair(enemy.NextPosition))
             {
-                enemy.ChangeState(enemy.CollectState);
+                enemy.NotEnoughBrick();
             }
         }
 

@@ -14,8 +14,8 @@ public class PlatformBrick : Brick
 
             if (character.colorType == colorType && !character.isFalling)
             {
-                character.AddBrick();
                 OnDespawn();
+                character.AddBrick();
             }
         }
     }
