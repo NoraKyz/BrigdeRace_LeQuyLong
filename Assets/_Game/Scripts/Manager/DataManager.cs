@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 public class DataManager : Singleton<DataManager>
 {
-    [SerializeField] private int level;
+    [SerializeField] private int levelId;
+
+    public int LevelId => levelId;
     
     #region Unity Functions
     protected void Awake()
     {
-        level = PlayerPrefs.GetInt("Level", 1);
-    }
-
-    private void Start()
-    {
-        
+        levelId = PlayerPrefs.GetInt("Level", 1);
     }
 
     #endregion
@@ -25,9 +23,9 @@ public class DataManager : Singleton<DataManager>
     
     private void SetLevel (int value)
     {
-        level = value;
+        levelId = value;
 
-        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("Level", levelId);
     }
     
     private int GetNextLevel(int currentLevel)

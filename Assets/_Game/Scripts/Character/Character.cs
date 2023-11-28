@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Character;
 using _Game.Framework.Debug;
+using _Game.Framework.Event;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -19,6 +21,7 @@ public class Character : ObjectColor
     [SerializeField] protected Transform model;
     
     [Header("Properties")]
+    [SerializeField] protected Stage currentStage;
     [SerializeField] protected Transform brickHolder;
     
     [HideInInspector] public bool isFalling = false;
@@ -48,7 +51,6 @@ public class Character : ObjectColor
             }
         }
     }
-
     protected virtual void Move() { }
     protected void RotateTowardMoveDirection(Vector3 nextPoint)
     {
@@ -87,17 +89,17 @@ public class Character : ObjectColor
 
         return true;
     }
-    private bool CheckGate(Vector3 nextPoint)
+    public bool CheckGate()
     {
         RaycastHit hit;
-        
-        if (Physics.Raycast(nextPoint, (nextPoint - transform.position).normalized, out hit, 1f, gateLayer))
+        if (Physics.Raycast(transform.position, model.transform.forward, out hit, 1f, gateLayer))
         {
             GateIn gateIn = hit.collider.GetComponent<GateIn>();
 
             if (gateIn.StageId != CurrentStageId)
             {
                 OnNextStage(gateIn);
+                EventManager.Instance.PostEvent(EventID.CharacterOnNextStage, this);
             }
             else
             {
@@ -120,7 +122,7 @@ public class Character : ObjectColor
     }
     protected bool CanMove(Vector3 nextPoint)
     {
-        return CheckStair(nextPoint) && CheckGate(nextPoint); 
+        return CheckStair(nextPoint) && CheckGate(); 
     }
     protected virtual void OnNextStage(GateIn gateIn)
     {
@@ -178,5 +180,9 @@ public class Character : ObjectColor
         }
         
         transform.position = targetPosition;
+    }
+    public void SetStage(Stage stage)
+    {
+        currentStage = stage;
     }
 }

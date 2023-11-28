@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Utils
+﻿namespace _Game.Character
 {
-    public sealed class CharacterAnimName
+    public static class CharacterAnimName
     {
         public const string Idle = "Idle";
         public const string Run = "Run";

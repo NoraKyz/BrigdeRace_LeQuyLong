@@ -5830,7 +5830,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9021425507068048129}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3428006753586608506
 GameObject:
@@ -10202,7 +10202,6 @@ MonoBehaviour:
   numRows: 4
   numCols: 6
   maxPlayer: 2
-  currentColors: 
   startPointSpawn: {fileID: 6403107466644700540}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6403107465816955082
@@ -10350,7 +10349,6 @@ MonoBehaviour:
   numRows: 8
   numCols: 9
   maxPlayer: 3
-  currentColors: 
   startPointSpawn: {fileID: 6403107465816955083}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6403107467075946989
@@ -10406,7 +10404,6 @@ MonoBehaviour:
   numRows: 10
   numCols: 13
   maxPlayer: 4
-  currentColors: 
   startPointSpawn: {fileID: 6403107466071382004}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6498974936740117882
@@ -12322,37 +12319,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7860648680326419275
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5561937949108669115}
-  m_Layer: 0
-  m_Name: FinishPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5561937949108669115
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7860648680326419275}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.5, z: 69.14}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9021425507068048129}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7912004199160985790
 GameObject:
   m_ObjectHideFlags: 0
@@ -14081,7 +14047,6 @@ Transform:
   - {fileID: 6403107466825647827}
   - {fileID: 6403107465644385124}
   - {fileID: 6403107467189782037}
-  - {fileID: 5561937949108669115}
   - {fileID: 3834697931479155286}
   m_Father: {fileID: 0}
   m_RootOrder: 0

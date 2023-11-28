@@ -7,5 +7,5 @@ public class Setting : UICanvas
     public void ContinueButton()
     {
         Close(0);
-    }
+    } 
 }

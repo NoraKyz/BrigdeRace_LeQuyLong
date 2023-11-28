@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Framework.Event;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -8,16 +9,17 @@ using Random = UnityEngine.Random;
 public class Stage : MonoBehaviour
 {
      [SerializeField] private int numRows, numCols;
-     [SerializeField] private int maxPlayer;
-     [SerializeField] private List<ColorType> currentColors = new List<ColorType>();
      [Header("==========================================")]
      [SerializeField] private Transform startPointSpawn;
      [SerializeField] private Vector3 offset;
      
+     private List<ColorType> _currentColors = new List<ColorType>();
      private int _maxBrick;
+     private int _maxPlayer;
      private bool HasPosValid => _listNoneBrickPos.Count > 0;
      private List<PlatformBrick> _listBricks = new List<PlatformBrick>();
      private List<Vector3> _listNoneBrickPos = new List<Vector3>();
+     
      private void Awake()
      {
           _maxBrick = numRows * numCols;
@@ -30,7 +32,7 @@ public class Stage : MonoBehaviour
      {
           GetAllNoneBrickPos();
 
-          foreach (ColorType colorType in currentColors)
+          foreach (ColorType colorType in _currentColors)
           {
                SpawnFullBrickByColor(colorType);
           }
@@ -68,7 +70,7 @@ public class Stage : MonoBehaviour
      {
           while (true)
           {
-               ColorType colorType = currentColors[Random.Range(0, currentColors.Count)];
+               ColorType colorType = _currentColors[Random.Range(0, _currentColors.Count)];
 
                if (!IsMaxBrickByColor(colorType))
                {
@@ -96,11 +98,11 @@ public class Stage : MonoBehaviour
      }
      private bool IsMaxBrickByColor(ColorType colorType)
      {
-          return GetAmountBrickByColor(colorType) > _maxBrick / maxPlayer + 1;
+          return GetAmountBrickByColor(colorType) > _maxBrick / _maxPlayer + 1;
      }
      private bool IsMaxAllBrick()
      {
-          foreach (var colorType in currentColors)
+          foreach (var colorType in _currentColors)
           {
                if (!IsMaxBrickByColor(colorType))
                {
@@ -118,8 +120,9 @@ public class Stage : MonoBehaviour
      }
      private IEnumerator AfterDespawn(PlatformBrick brick)
      {
+          Vector3 pos = brick.transform.position;
           yield return new WaitForSeconds(Constants.RespawnPlatformBrickTime);
-          _listNoneBrickPos.Add(brick.transform.position);
+          _listNoneBrickPos.Add(pos);
           SpawnBrickRandPos(GetRandomColorValid());
      }
      private void SpawnFullBrickByColor(ColorType colorType)
@@ -128,6 +131,10 @@ public class Stage : MonoBehaviour
           {
                SpawnBrickRandPos(colorType);
           }
+     }
+     private void OnCharacterOnNextStage(Character character)
+     {
+          SpawnFullBrickByColor(character.colorType);
      }
      public List<Vector3> GetListPosBrickTakeable(ColorType colorType)
      {
@@ -142,5 +149,19 @@ public class Stage : MonoBehaviour
           }
 
           return listPos;
+     }
+     public void SetListColor(List<ColorType> colors)
+     {
+          _currentColors = colors;
+     }
+     public void OnCharacterEnter(Character character)
+     {
+          _currentColors.Add(character.colorType);
+          SpawnFullBrickByColor(character.colorType);
+     }
+     
+     public void SetMaxPlayer(int maxPlayer)
+     {
+          _maxPlayer = maxPlayer;
      }
 }

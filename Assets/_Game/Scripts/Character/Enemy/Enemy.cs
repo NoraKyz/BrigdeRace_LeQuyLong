@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Game.Character;
 using _Game.Framework.Debug;
+using _Game.Framework.Event;
 using _Game.Framework.StateMachine;
 using _Game.Pattern.StateMachine;
 using _Game.Utils;
@@ -19,7 +21,6 @@ public class Enemy : Character
     
     [Header("Properties")]
     [SerializeField] private Transform finishPoint;
-    [SerializeField] private Stage currentStage;
     
     private bool _isGoingToFinishPoint = false;
     private IState<Enemy> _currentState;
@@ -130,6 +131,12 @@ public class Enemy : Character
     {
         _isGoingToFinishPoint = false;
         ChangeState(CollectState);
+    }
+
+    public override void OnWin()
+    {
+        base.OnWin();
+        EventManager.Instance.PostEvent(EventID.PlayerLose);
     }
 }
 

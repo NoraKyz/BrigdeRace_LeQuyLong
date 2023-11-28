@@ -1,3 +1,6 @@
+using _Game.Character;
+using _Game.Framework.Event;
+using Camera;
 using UnityEngine;
 using Utils;
 
@@ -8,6 +11,21 @@ public class Player : Character
     [SerializeField] protected float moveSpeed;
     
     private Vector3 _inputDirection;
+    
+    private void Awake()
+    {
+        if (joystick == null)
+        {
+            joystick = FindObjectOfType<FloatingJoystick>();
+        }
+
+        CameraFollow cameraFollow = FindObjectOfType<CameraFollow>();
+
+        if (cameraFollow != null)
+        {
+            cameraFollow.SetTarget(transform);
+        }
+    }
     
     private void Update()
     {
@@ -40,5 +58,10 @@ public class Player : Character
             ChangeAnim(CharacterAnimName.Idle);
         }
     }
- 
+
+    public override void OnWin()
+    {
+        base.OnWin();
+        EventManager.Instance.PostEvent(EventID.PlayerWin);
+    }
 }
