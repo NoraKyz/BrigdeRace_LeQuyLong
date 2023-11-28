@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Brick;
+using _Game.Character;
 using _Game.Framework.Event;
 using UnityEngine;
 using Utils;
@@ -136,19 +138,25 @@ public class Stage : MonoBehaviour
      {
           SpawnFullBrickByColor(character.colorType);
      }
-     public List<Vector3> GetListPosBrickTakeable(ColorType colorType)
+     public Vector3? GetBrickPosTakeAble(ColorType colorType)
      {
           List<Vector3> listPos = new List<Vector3>();
           
-          foreach (var brick in _listBricks)
+          for(int i = 0; i < _listBricks.Count; i++)
           {
-               if (brick.colorType == colorType)
+               if (_listBricks[i].colorType == colorType)
                {
-                    listPos.Add(brick.transform.position);
+                    listPos.Add(_listBricks[i].transform.position);
                }
           }
 
-          return listPos;
+          if (listPos.Count > 0)
+          {
+               int index = Random.Range(0, listPos.Count);
+               return listPos[index];
+          }
+
+          return null;
      }
      public void SetListColor(List<ColorType> colors)
      {

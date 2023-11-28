@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Character;
 using _Game.Framework.Event;
 using _Game.Utils;
 using UnityEngine;
@@ -42,6 +43,7 @@ public class Level : MonoBehaviour
     private void OnCharacterNextStage(Character character)
     {
         stages[character.CurrentStageId].OnCharacterEnter(character);
+        character.SetStage(stages[character.CurrentStageId]);
     }
     
     private void SetStartCharPos()

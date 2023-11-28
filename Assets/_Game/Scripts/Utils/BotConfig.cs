@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Utils
 {
@@ -6,5 +7,6 @@ namespace _Game.Utils
     public class BotConfig : ScriptableObject
     {
         public int moveSpeed;
+        public int chanceToFinishPoint;
     }
 }

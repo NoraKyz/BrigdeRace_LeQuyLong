@@ -1,41 +1,42 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cache = _Framework.Cache;
 
-public class DropBrick : Brick
+namespace _Game.Brick
 {
-    private bool _isTakeAble;
-
-    private void OnEnable()
+    public class DropBrick : Brick
     {
-        _isTakeAble = false;
-        StartCoroutine(TakeAble());
-    }
+        private bool _isTakeAble;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!_isTakeAble)
+        private void OnEnable()
         {
-            return;
+            _isTakeAble = false;
+            StartCoroutine(TakeAble());
         }
-        
-        if (other.CompareTag("Character"))
+
+        private void OnTriggerEnter(Collider other)
         {
-            Character character = other.GetComponent<Character>();
-        
-            if (!character.isFalling)
+            if (!_isTakeAble)
             {
-                StopCoroutine(TakeAble());
-                OnDespawn();
-                character.AddBrick();
+                return;
+            }
+        
+            if (other.CompareTag("Character"))
+            {
+                Character.Character character = Cache.GetCharacter(other);
+        
+                if (!character.isFalling)
+                {
+                    OnDespawn();
+                    character.AddBrick();
+                }
             }
         }
-    }
     
-    private IEnumerator TakeAble()
-    {
-        yield return new WaitForSeconds(1f);
-        _isTakeAble = true;
+        private IEnumerator TakeAble()
+        {
+            yield return new WaitForSeconds(1f);
+            _isTakeAble = true;
+        }
     }
 }

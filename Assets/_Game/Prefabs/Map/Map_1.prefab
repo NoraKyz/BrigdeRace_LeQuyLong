@@ -10200,8 +10200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRows: 4
-  numCols: 6
-  maxPlayer: 2
+  numCols: 5
   startPointSpawn: {fileID: 6403107466644700540}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6403107465816955082
@@ -10348,7 +10347,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRows: 8
   numCols: 9
-  maxPlayer: 3
   startPointSpawn: {fileID: 6403107465816955083}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6403107467075946989
@@ -10403,7 +10401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numRows: 10
   numCols: 13
-  maxPlayer: 4
   startPointSpawn: {fileID: 6403107466071382004}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6498974936740117882

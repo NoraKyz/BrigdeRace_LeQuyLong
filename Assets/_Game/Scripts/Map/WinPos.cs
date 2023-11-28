@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Character;
 using _Game.Framework.Event;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class WinPos : MonoBehaviour
         {
             Character character = other.GetComponent<Character>();
             
-            character.OnWin();
+            character.OnWinPos();
             StartCoroutine(character.MovePosition(top1Pos.position, 0.5f));
         }
     }

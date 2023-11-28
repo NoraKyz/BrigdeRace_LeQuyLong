@@ -1,26 +1,24 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using _Game.Utils;
 using UnityEngine;
-using Utils;
 
-public class Brick : ObjectColor
+namespace _Game.Brick
 {
-    protected void Start()
+    public class Brick : ObjectColor
     {
-        OnInit();
-    }
-
-    protected virtual void OnDespawn()
-    {
-        SimplePool.Despawn(this);
-    }
-
-    protected virtual IEnumerator FlyToCharacter(Vector3 targetPosition)
-    {
-        // TODO: effect fly to player
-        yield return new WaitForSeconds(1f);
-        OnDespawn();
+        protected void Start()
+        {
+            OnInit();
+        }
+        protected virtual void OnDespawn()
+        {
+            SimplePool.Despawn(this);
+        }
+        protected IEnumerator FlyToCharacter(Vector3 targetPosition)
+        {
+            // TODO: effect fly to player
+            yield return new WaitForSeconds(1f);
+            OnDespawn();
+        }
     }
 }

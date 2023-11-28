@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class CharacterBrick : Brick
+namespace _Game.Brick
 {
+    public class CharacterBrick : Brick
+    {
     
+    }
 }

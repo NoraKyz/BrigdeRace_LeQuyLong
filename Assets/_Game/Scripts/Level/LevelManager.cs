@@ -38,6 +38,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (currentLevel != null)
         {
+            SimplePool.CollectAll();
             Destroy(currentLevel);
         }
     }

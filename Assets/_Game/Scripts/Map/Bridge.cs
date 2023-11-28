@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Brick;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -9,7 +10,7 @@ public class Bridge : MonoBehaviour
 {
     [Header("Config")]
     [SerializeField] private int bridgeCount;
-    [SerializeField] private List<BrigdeBrick> listBricks = new List<BrigdeBrick>();
+    [SerializeField] private List<BridgeBrick> listBricks = new List<BridgeBrick>();
     [SerializeField] private Vector3 brickOffset;
     
     [Header("Components")]
@@ -45,7 +46,7 @@ public class Bridge : MonoBehaviour
         {
             _spawnPos.Set(0, brickOffset.y * i, brickOffset.z * i + BridgeBrickSize.z / 2);
             
-            BrigdeBrick brick = SimplePool.Spawn<BrigdeBrick>(PoolType.BrigdeBrick, _spawnPos, Quaternion.identity, transform);
+            BridgeBrick brick = SimplePool.Spawn<BridgeBrick>(PoolType.BrigdeBrick, _spawnPos, Quaternion.identity, transform);
             listBricks.Add(brick);
         }
     }

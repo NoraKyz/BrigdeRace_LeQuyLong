@@ -1,28 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformBrick : Brick
+namespace _Game.Brick
 {
-    public event Action<PlatformBrick> OnDespawnEvent;
-    private void OnTriggerEnter(Collider other)
+    public class PlatformBrick : Brick
     {
-        if (other.CompareTag("Character"))
+        public event Action<PlatformBrick> OnDespawnEvent;
+        private void OnTriggerEnter(Collider other)
         {
-            Character character = other.GetComponent<Character>();
-
-            if (character.colorType == colorType && !character.isFalling)
+            if (other.CompareTag("Character"))
             {
-                OnDespawn();
-                character.AddBrick();
+                Character.Character character = other.GetComponent<Character.Character>();
+
+                if (character.colorType == colorType && !character.isFalling)
+                {
+                    OnDespawn();
+                    character.AddBrick();
+                }
             }
         }
-    }
     
-    protected override void OnDespawn()
-    {
-        base.OnDespawn();
-        OnDespawnEvent?.Invoke(this);
+        protected override void OnDespawn()
+        {
+            base.OnDespawn();
+            OnDespawnEvent?.Invoke(this);
+        }
     }
 }

@@ -59,9 +59,9 @@ public class Player : Character
         }
     }
 
-    public override void OnWin()
+    public override void OnWinPos()
     {
-        base.OnWin();
+        base.OnWinPos();
         this.PostEvent(EventID.PlayerWin);
     }
 }

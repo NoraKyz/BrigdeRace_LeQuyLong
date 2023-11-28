@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using _Game.Character;
-using _Game.Framework.Debug;
+﻿using _Game.Character;
 using _Game.Framework.Event;
 using _Game.Framework.StateMachine;
 using _Game.Pattern.StateMachine;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
-using Utils;
 
 public class Enemy : Character
 {
@@ -24,7 +19,6 @@ public class Enemy : Character
     
     private bool _isGoingToFinishPoint = false;
     private IState<Enemy> _currentState;
-    private List<Vector3> _listBrickPos = new List<Vector3>();
     public BotConfig BotConfig => botConfig;
     public Vector3 NextPosition => navMeshAgent.nextPosition;
 
@@ -84,8 +78,7 @@ public class Enemy : Character
             return;
         }
         
-        float random = UnityEngine.Random.Range(0f, 1f);
-        if (random >= 0.9f)
+        if (Utilities.Chance(botConfig.chanceToFinishPoint))
         {
             _isGoingToFinishPoint = true;
             ChangeState(MoveToFinishPointState);
@@ -101,12 +94,11 @@ public class Enemy : Character
     }
     public void MoveToRandomBrick()
     {
-        _listBrickPos = currentStage.GetListPosBrickTakeable(colorType);
+        var brickPos = currentStage.GetBrickPosTakeAble(colorType);
         
-        if (_listBrickPos.Count > 0)
+        if (brickPos != null)
         {
-            int randomIndex = UnityEngine.Random.Range(0, _listBrickPos.Count);
-            MoveToPosition(_listBrickPos[randomIndex]);
+            MoveToPosition((Vector3)brickPos);
         }
         else
         {
@@ -132,10 +124,9 @@ public class Enemy : Character
         _isGoingToFinishPoint = false;
         ChangeState(CollectState);
     }
-
-    public override void OnWin()
+    public override void OnWinPos()
     {
-        base.OnWin();
+        base.OnWinPos();
         this.PostEvent(EventID.PlayerLose);
     }
 }

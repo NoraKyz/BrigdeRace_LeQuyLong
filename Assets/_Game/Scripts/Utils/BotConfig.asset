@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: BotConfig
   m_EditorClassIdentifier: 
   moveSpeed: 6
+  chanceToFinishPoint: 30
