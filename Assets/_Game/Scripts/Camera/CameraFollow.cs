@@ -1,3 +1,4 @@
+using _UI.Scripts.UI;
 using UnityEngine;
 
 namespace Camera
@@ -10,9 +11,12 @@ namespace Camera
         
         private void LateUpdate()
         {
-            Vector3 desiredPosition = target.position + offset;
-            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-            transform.position = smoothedPosition;
+            if (GameManager.IsState(GameState.GamePlay))
+            {
+                Vector3 desiredPosition = target.position + offset;
+                Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+                transform.position = smoothedPosition;
+            }
         }
         
         public void SetTarget(Transform target)

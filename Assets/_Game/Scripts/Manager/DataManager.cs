@@ -17,13 +17,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void SetNexLevel()
     {
-        if(levelId + 1 > Constants.MaxLevel)
-        {
-            levelId = 1;
-        }
-        
-        levelId += 1;
-        
+        levelId = levelId + 1 > Constants.MaxLevel ? 1 : levelId + 1;
         PlayerPrefs.SetInt("Level", levelId);
     }
 }
