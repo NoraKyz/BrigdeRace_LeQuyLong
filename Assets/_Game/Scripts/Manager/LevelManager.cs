@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private List<GameObject> levelPrefabs = new List<GameObject>();
+
+    private int currentLevelID;
+    private GameObject currentLevel;
+    
+    #region Unity Functions
+
+    private void Start()
     {
-        
+        // TODO: Subscribe to events
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+
+    #region Other Functions
+
+    private void LoadLevel(int id)
     {
+        currentLevelID = id;
+
+        if (currentLevel != null)
+        {
+            Destroy(currentLevel);
+        }
         
+        currentLevel = Instantiate(levelPrefabs[id - 1], transform);
     }
+
+    #endregion
 }

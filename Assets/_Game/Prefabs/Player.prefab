@@ -374,9 +374,10 @@ MonoBehaviour:
     m_Bits: 128
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
-  moveSpeed: 6
   brickHolder: {fileID: 4342106647374914131}
+  isFalling: 0
   joystick: {fileID: 0}
+  moveSpeed: 6
 --- !u!1 &4434858497945783070
 GameObject:
   m_ObjectHideFlags: 0

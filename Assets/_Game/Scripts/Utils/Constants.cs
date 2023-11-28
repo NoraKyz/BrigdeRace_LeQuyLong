@@ -16,6 +16,8 @@ namespace Utils
         public const float StunTime = 1.5f;
         
         // Game play
+        public const int MaxLevel = 3;
         public const float TimeToStartGame = 3f;
+        public const int MaxDistanceStartCharPos = 20;
     }
 }

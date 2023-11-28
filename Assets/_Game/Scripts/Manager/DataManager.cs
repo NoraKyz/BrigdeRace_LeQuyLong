@@ -1,18 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Utils;
 
 public class DataManager : Singleton<DataManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int level;
+    
+    #region Unity Functions
+    protected void Awake()
+    {
+        level = PlayerPrefs.GetInt("Level", 1);
+    }
+
+    private void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    #endregion
+    
+    #region Other Functions
+    
+    private void SetLevel (int value)
     {
-        
+        level = value;
+
+        PlayerPrefs.SetInt("Level", level);
     }
+    
+    private int GetNextLevel(int currentLevel)
+    {
+        if(currentLevel + 1 > Constants.MaxLevel)
+        {
+            return 1;
+        }
+        
+        return currentLevel + 1;
+    }
+
+    #endregion
 }

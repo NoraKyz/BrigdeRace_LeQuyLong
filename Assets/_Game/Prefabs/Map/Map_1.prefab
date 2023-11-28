@@ -5801,6 +5801,37 @@ MonoBehaviour:
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 7351221660814588177}
   colorType: 7
+--- !u!1 &3414957238836723281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3834697931479155286}
+  m_Layer: 0
+  m_Name: StartCharPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3834697931479155286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414957238836723281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10, y: 0, z: -12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9021425507068048129}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3428006753586608506
 GameObject:
   m_ObjectHideFlags: 0
@@ -10375,7 +10406,7 @@ MonoBehaviour:
   numRows: 10
   numCols: 13
   maxPlayer: 4
-  currentColors: 01000000020000000300000004000000
+  currentColors: 
   startPointSpawn: {fileID: 6403107466071382004}
   offset: {x: 2, y: 0, z: 2}
 --- !u!1 &6498974936740117882
@@ -14051,6 +14082,7 @@ Transform:
   - {fileID: 6403107465644385124}
   - {fileID: 6403107467189782037}
   - {fileID: 5561937949108669115}
+  - {fileID: 3834697931479155286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
