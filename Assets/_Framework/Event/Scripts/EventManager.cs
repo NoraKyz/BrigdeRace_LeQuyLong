@@ -75,7 +75,7 @@ namespace _Game.Framework.Event
 
 	#region Extension class
 	// This is "shortcut" for using EventDispatcher easier
-	public static class EventDispatcherExtension
+	public static class EventDispatcher
 	{
 		public static void RegisterListener (this MonoBehaviour listener, EventID eventID, Action<object> callback)
 		{

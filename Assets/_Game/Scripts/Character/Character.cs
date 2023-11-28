@@ -99,7 +99,7 @@ public class Character : ObjectColor
             if (gateIn.StageId != CurrentStageId)
             {
                 OnNextStage(gateIn);
-                EventManager.Instance.PostEvent(EventID.CharacterOnNextStage, this);
+                this.PostEvent(EventID.CharacterOnNextStage, this);
             }
             else
             {

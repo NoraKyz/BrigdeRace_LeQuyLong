@@ -136,7 +136,7 @@ public class Enemy : Character
     public override void OnWin()
     {
         base.OnWin();
-        EventManager.Instance.PostEvent(EventID.PlayerLose);
+        this.PostEvent(EventID.PlayerLose);
     }
 }
 

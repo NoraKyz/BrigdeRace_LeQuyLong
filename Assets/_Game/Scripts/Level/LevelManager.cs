@@ -12,8 +12,6 @@ public class LevelManager : Singleton<LevelManager>
     private int currentLevelID;
     private GameObject currentLevel;
 
-    #region Other Functions
-
     private void LoadLevel(int id)
     {
         currentLevelID = id;
@@ -35,6 +33,12 @@ public class LevelManager : Singleton<LevelManager>
     {
         LoadLevel(DataManager.Instance.LevelId);
     }
-
-    #endregion
+    
+    public void ClearCurrentLevel()
+    {
+        if (currentLevel != null)
+        {
+            Destroy(currentLevel);
+        }
+    }
 }

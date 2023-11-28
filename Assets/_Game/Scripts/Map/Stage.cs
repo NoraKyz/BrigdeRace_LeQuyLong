@@ -159,7 +159,6 @@ public class Stage : MonoBehaviour
           _currentColors.Add(character.colorType);
           SpawnFullBrickByColor(character.colorType);
      }
-     
      public void SetMaxPlayer(int maxPlayer)
      {
           _maxPlayer = maxPlayer;

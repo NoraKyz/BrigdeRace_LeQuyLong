@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using _Game.Framework.Event;
 using _UI.Scripts.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -32,6 +33,14 @@ public class GameManager : Singleton<GameManager>
         ChangeState(GameState.MainMenu);
 
         UIManager.Instance.OpenUI<MainMenu>();
+        
+        RegisterEvent();
+    }
+
+    private void RegisterEvent()
+    {
+        this.RegisterListener(EventID.PlayerWin, (param) => OnPlayerWin());
+        this.RegisterListener(EventID.PlayerLose, (param) => OnPlayerLose());
     }
 
     public static void ChangeState(GameState state)
@@ -42,5 +51,18 @@ public class GameManager : Singleton<GameManager>
     public static bool IsState(GameState state)
     {
         return gameState == state;
+    }
+    
+    private void OnPlayerWin()
+    {
+        ChangeState(GameState.MainMenu);
+        UIManager.Instance.OpenUI<Win>();
+        DataManager.Instance.SetNexLevel();
+    }
+    
+    private void OnPlayerLose()
+    {
+        ChangeState(GameState.MainMenu);
+        UIManager.Instance.OpenUI<Lose>();
     }
 }

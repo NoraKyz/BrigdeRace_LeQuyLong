@@ -10,33 +10,20 @@ public class DataManager : Singleton<DataManager>
     [SerializeField] private int levelId;
 
     public int LevelId => levelId;
-    
-    #region Unity Functions
+
     protected void Awake()
     {
         levelId = PlayerPrefs.GetInt("Level", 1);
     }
-
-    #endregion
-    
-    #region Other Functions
-    
-    private void SetLevel (int value)
+    public void SetNexLevel()
     {
-        levelId = value;
-
-        PlayerPrefs.SetInt("Level", levelId);
-    }
-    
-    private int GetNextLevel(int currentLevel)
-    {
-        if(currentLevel + 1 > Constants.MaxLevel)
+        if(levelId + 1 > Constants.MaxLevel)
         {
-            return 1;
+            levelId = 1;
         }
         
-        return currentLevel + 1;
+        levelId += 1;
+        
+        PlayerPrefs.SetInt("Level", levelId);
     }
-
-    #endregion
 }

@@ -36,7 +36,7 @@ public class Level : MonoBehaviour
     
     private void EventRegister()
     {
-        EventManager.Instance.RegisterListener(EventID.CharacterOnNextStage, (param) => OnCharacterNextStage((Character)param));
+        this.RegisterListener(EventID.CharacterOnNextStage, (param) => OnCharacterNextStage((Character)param));
     }
     
     private void OnCharacterNextStage(Character character)

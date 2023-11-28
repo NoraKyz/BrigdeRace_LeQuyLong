@@ -62,6 +62,6 @@ public class Player : Character
     public override void OnWin()
     {
         base.OnWin();
-        EventManager.Instance.PostEvent(EventID.PlayerWin);
+        this.PostEvent(EventID.PlayerWin);
     }
 }
