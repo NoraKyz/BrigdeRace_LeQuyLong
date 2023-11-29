@@ -5,11 +5,14 @@ using _Game.Framework.Event;
 using _Game.Utils;
 using UnityEngine;
 using Utils;
+using Cache = _Framework.Cache;
 
 namespace _Game.Character
 {
     public class Character : ObjectColor
     {
+        private const float OffsetCharBrick = 1.2f;
+        
         [Header("Layer")]
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] private LayerMask stairLayer;
@@ -20,37 +23,33 @@ namespace _Game.Character
         [SerializeField] protected Transform model;
     
         [Header("Properties")]
-        [SerializeField] protected Stage currentStage;
         [SerializeField] protected Transform brickHolder;
     
-        [HideInInspector] public bool isFalling = false;
-        protected Stack<CharacterBrick> bricks = new Stack<CharacterBrick>();
-        protected string currentAnimName;
-    
-        //public event Action OnMovePositionComplete;
-        public int BrickAmount => bricks.Count;
+        private Stack<CharacterBrick> _bricks = new Stack<CharacterBrick>();
+        private string _currentAnimName;
+        public bool IsFalling { get; } = false;
+        public int BrickAmount => _bricks.Count;
         public int CurrentStageId { get; private set; }
         protected void Start()
         {
             OnInit();
         }
-        protected override void OnInit()
-        {
-            base.OnInit();
-            ChangeAnim(CharacterAnimName.Idle);
-        }
         protected void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Character"))
             {
-                Character character = other.GetComponent<Character>();
+                Character character = Cache.GetCharacter(other);
                 if(character.BrickAmount > BrickAmount && BrickAmount > 0)
                 {
                     DropBrick();
                 }
             }
         }
-        protected virtual void Move() { }
+        protected override void OnInit()
+        {
+            base.OnInit();
+            ChangeAnim(CharacterAnimName.Idle);
+        }
         private Vector3 GetNextBrickPosInHolder()
         {
             if(BrickAmount == 0)
@@ -58,28 +57,36 @@ namespace _Game.Character
                 return Vector3.zero;
             }
         
-            return bricks.Peek().transform.localPosition + Vector3.up * Constants.CharacterBrickSize.y * 1.2f;
-        }
-        protected void RotateTowardMoveDirection(Vector3 nextPoint)
-        {
-            Vector3 direction = nextPoint - transform.position;
-            direction.y = 0;
-            model.forward = direction;
+            return _bricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
         }
         protected Vector3 CheckGround(Vector3 nextPoint)
         {
-            RaycastHit hit;
-
-            if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, groundLayer))
+            if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, groundLayer))
             {
                 return hit.point + Vector3.up;
             }
 
-            return transform.position;
+            return TF.position;
         }
-        protected bool CanMove(Vector3 nextPoint)
+        public bool CheckStair(Vector3 nextPoint)
         {
-            return CheckStair(nextPoint) && CheckGate(); 
+            if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, stairLayer))
+            {
+                BridgeBrick bridgeBrick = hit.collider.GetComponent<BridgeBrick>();
+
+                if (bridgeBrick.colorType != colorType && BrickAmount > 0)
+                {
+                    bridgeBrick.ChangeColor(colorType);
+                    RemoveBrick();
+                }
+
+                if (bridgeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         protected virtual void OnNextStage(GateIn gateIn)
         {
@@ -88,13 +95,13 @@ namespace _Game.Character
         }
         public void ChangeAnim(string animName)
         {
-            if (currentAnimName == animName)
+            if (_currentAnimName == animName)
             {
                 return;
             }
         
             anim.ResetTrigger(animName);
-            currentAnimName = animName;
+            _currentAnimName = animName;
             anim.SetTrigger(animName);
         }
         public virtual void AddBrick()
@@ -106,11 +113,11 @@ namespace _Game.Character
                 brickHolder
             );
             brick.ChangeColor(colorType);
-            bricks.Push(brick);
+            _bricks.Push(brick);
         }
         public virtual void RemoveBrick()
         {
-            SimplePool.Despawn(bricks.Pop());
+            SimplePool.Despawn(_bricks.Pop());
         }
         public virtual void DropBrick()
         {
@@ -141,28 +148,6 @@ namespace _Game.Character
         public void SetStage(Stage stage)
         {
             currentStage = stage;
-        }
-        public bool CheckStair(Vector3 nextPoint)
-        {
-            RaycastHit hit;
-        
-            if (Physics.Raycast(nextPoint, Vector3.down, out hit, 2f, stairLayer))
-            {
-                BridgeBrick bridgeBrick = hit.collider.GetComponent<BridgeBrick>();
-
-                if (bridgeBrick.colorType != colorType && BrickAmount > 0)
-                {
-                    bridgeBrick.ChangeColor(colorType);
-                    RemoveBrick();
-                }
-
-                if (bridgeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
         public bool CheckGate()
         {

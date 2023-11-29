@@ -1,23 +1,21 @@
 ﻿using System.Collections.Generic;
-using _Game.Character;
 using UnityEngine;
 
 namespace _Framework
 {
-    public class Cache 
+    public static class Cache <T>
     {
-        private static Dictionary<Collider, Character> _dictCharacters = new Dictionary<Collider, Character>();
-        
-        public static Character GetCharacter(Collider collider)
+        private static Dictionary<Collider, T> _dict = new Dictionary<Collider, T>();
+        public static T GetScript(Collider collider)
         {
-            if (_dictCharacters.TryGetValue(collider, out var character))
+            if (_dict.TryGetValue(collider, out var value))
             {
-                return character;
+                return value;
             }
             else
             {
-                Character collectItems = collider.GetComponent<Character>();
-                _dictCharacters.Add(collider, collectItems);
+                T collectItems = collider.GetComponent<T>();
+                _dict.Add(collider, collectItems);
                 return collectItems;
             }
         }

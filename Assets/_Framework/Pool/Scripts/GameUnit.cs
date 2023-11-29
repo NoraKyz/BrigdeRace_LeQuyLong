@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameUnit : MonoBehaviour
+namespace _Framework.Pool.Scripts
 {
-    private Transform tf;
-    public Transform TF
+    public class GameUnit : MonoBehaviour
     {
-        get
+        private Transform _tf;
+        public Transform TF
         {
-            //tf = tf ?? gameObject.transform;
-            if (tf == null)
+            get
             {
-                tf = transform;
+                //tf = tf ?? gameObject.transform;
+                if (_tf == null)
+                {
+                    _tf = transform;
+                }
+                return _tf;
             }
-            return tf;
         }
-    }
 
-    public PoolType poolType;
+        public PoolType poolType;
+    }
 }

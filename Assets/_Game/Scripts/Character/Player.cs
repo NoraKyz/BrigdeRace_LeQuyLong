@@ -59,9 +59,21 @@ public class Player : Character
         }
     }
 
+    private void RotateTowardMoveDirection(Vector3 nextPoint)
+    {
+        Vector3 direction = nextPoint - transform.position;
+        direction.y = 0;
+        model.forward = direction;
+    }
+
     public override void OnWinPos()
     {
         base.OnWinPos();
         this.PostEvent(EventID.PlayerWin);
+    }
+
+    private bool CanMove(Vector3 nextPoint)
+    {
+        return CheckStair(nextPoint) && CheckGate(); 
     }
 }

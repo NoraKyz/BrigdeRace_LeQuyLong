@@ -1,6 +1,6 @@
 using System.Collections;
+using _Framework;
 using UnityEngine;
-using Cache = _Framework.Cache;
 
 namespace _Game.Brick
 {
@@ -23,9 +23,9 @@ namespace _Game.Brick
         
             if (other.CompareTag("Character"))
             {
-                Character.Character character = Cache.GetCharacter(other);
+                Character.Character character = Cache<Character.Character>.GetScript(other);
         
-                if (!character.isFalling)
+                if (!character.IsFalling)
                 {
                     OnDespawn();
                     character.AddBrick();

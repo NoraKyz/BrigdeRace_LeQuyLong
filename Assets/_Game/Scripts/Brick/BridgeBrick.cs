@@ -1,5 +1,5 @@
+using _Framework;
 using UnityEngine;
-using Cache = _Framework.Cache;
 
 namespace _Game.Brick
 {
@@ -9,7 +9,7 @@ namespace _Game.Brick
         {
             if (other.CompareTag("Character"))
             {
-                Character.Character character = Cache.GetCharacter(other);
+                Character.Character character = Cache<Character.Character>.GetScript(other);
 
                 if (character.colorType != colorType && character.BrickAmount > 0)
                 {
