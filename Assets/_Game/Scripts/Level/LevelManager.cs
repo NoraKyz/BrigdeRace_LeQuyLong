@@ -15,18 +15,13 @@ public class LevelManager : Singleton<LevelManager>
     private void LoadLevel(int id)
     {
         currentLevelID = id;
-
+    
         if (currentLevel != null)
         {
             Destroy(currentLevel);
         }
         
         currentLevel = Instantiate(levelPrefabs[id - 1], transform);
-    }
-    
-    public List<ColorType> GetRandomListColor(int amount)
-    {
-        return Utilities.RandomList(colorTypes, amount);
     }
     
     public void LoadCurrentLevel()

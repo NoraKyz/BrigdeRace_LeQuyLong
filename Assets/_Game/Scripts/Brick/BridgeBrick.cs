@@ -11,7 +11,7 @@ namespace _Game.Brick
             {
                 Character.Character character = Cache<Character.Character>.GetScript(other);
 
-                if (character.ColorType != colorType && character.BrickAmount > 0)
+                if (character.ColorType != ColorType && character.BrickAmount > 0)
                 {
                     character.RemoveBrick();
                     ChangeColor(character.ColorType);

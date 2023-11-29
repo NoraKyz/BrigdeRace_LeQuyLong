@@ -4,6 +4,7 @@ using _Game.Pattern.StateMachine;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace _Game.Character
 {
@@ -14,7 +15,7 @@ namespace _Game.Character
     
         [Header("Properties")]
         [SerializeField] private BotConfig botConfig;
-        [SerializeField] private Transform finishPoint;
+        [SerializeField] private Transform finishPos;
     
         private bool _isGoingToFinishPoint = false;
         private IState<Enemy> _currentState;
@@ -30,20 +31,12 @@ namespace _Game.Character
         public FallState FallState { get; private set; }
 
         #endregion
-
         private void Awake()
         {
             IdleState = new IdleState();
             CollectState = new CollectState();
             MoveToFinishPointState = new MoveToFinishPointState();
             FallState = new FallState();
-        }
-        protected override void OnInit()
-        {
-            base.OnInit();
-        
-            navMeshAgent.speed = botConfig.moveSpeed;
-            ChangeState(IdleState);
         }
         private void Update()
         {
@@ -52,27 +45,13 @@ namespace _Game.Character
                 _currentState.OnExecute(this);
             }
         }
-        public void ChangeState(IState<Enemy> state)
-        {
-            if (_currentState != null)
-            {
-                _currentState.OnExit(this);
-            }
-
-            _currentState = state;
-
-            if (_currentState != null)
-            {
-                _currentState.OnEnter(this);
-            }
-        }
         private void MoveToPosition(Vector3 position)
         {
-            navMeshAgent.enabled = true;
-            navMeshAgent.SetDestination(position);
+            _destination = position;
+            navMeshAgent.SetDestination(_destination);
             ChangeAnim(CharacterAnimName.Run);
         }
-        private void AllowMoveToFinishPoint()
+        private void RandomChanceMoveToFinishPos()
         {
             if (_isGoingToFinishPoint)
             {
@@ -89,37 +68,58 @@ namespace _Game.Character
                 MoveToRandomBrick();
             }
         }
-        public void MoveToFinishPos()
+        protected override void OnInit()
         {
-            MoveToPosition(finishPoint.position);   
-        }
-        public void MoveToRandomBrick()
-        {
-            var brickPos = currentStage.GetBrickPosTakeAble(colorType);
+            base.OnInit();
         
-            if (brickPos != null)
-            {
-                MoveToPosition((Vector3)brickPos);
-            }
-            else
-            {
-                ChangeState(MoveToFinishPointState);
-            }
-        }   
-        public override void AddBrick()
-        {
-            base.AddBrick();
-            AllowMoveToFinishPoint();
+            navMeshAgent.speed = botConfig.moveSpeed;
+            ChangeState(IdleState);
         }
-
         protected override void DropBrick()
         {
             base.DropBrick();
             ChangeState(FallState);
         }
+        public void ChangeState(IState<Enemy> state)
+        {
+            if (_currentState != null)
+            {
+                _currentState.OnExit(this);
+            }
+
+            _currentState = state;
+
+            if (_currentState != null)
+            {
+                _currentState.OnEnter(this);
+            }
+        }
+        public void MoveToFinishPos()
+        {
+            MoveToPosition(finishPos.position);   
+        }
+        public void MoveToRandomBrick()
+        {
+            // UNDONE: Get random brick position
+            // Vector3? brickPos = ;
+            //
+            // if (brickPos != null)
+            // {
+            //     MoveToPosition((Vector3)brickPos);
+            // }
+            // else
+            // {
+            //     ChangeState(MoveToFinishPointState);
+            // }
+        }   
+        public override void AddBrick()
+        {
+            base.AddBrick();
+            RandomChanceMoveToFinishPos();
+        }
         public void StopMove()
         {
-            navMeshAgent.enabled = false;
+            MoveToPosition(TF.position);
         }
         public void NotEnoughBrick()
         {

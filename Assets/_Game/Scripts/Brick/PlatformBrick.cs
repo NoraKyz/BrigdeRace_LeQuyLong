@@ -13,7 +13,7 @@ namespace _Game.Brick
             {
                 Character.Character character = Cache<Character.Character>.GetScript(other);
 
-                if (character.ColorType == colorType && !character.IsFalling)
+                if (character.ColorType == ColorType && !character.IsFalling)
                 {
                     OnDespawn();
                     character.AddBrick();

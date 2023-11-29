@@ -90,7 +90,7 @@ public class Stage : MonoBehaviour
           int count = 0;
           foreach (var brick in _listBricks)
           {
-               if (brick.colorType == colorType)
+               if (brick.ColorType == colorType)
                {
                     count++;
                }
@@ -136,7 +136,7 @@ public class Stage : MonoBehaviour
      }
      private void OnCharacterOnNextStage(Character character)
      {
-          SpawnFullBrickByColor(character.colorType);
+          SpawnFullBrickByColor(character.ColorType);
      }
      public Vector3? GetBrickPosTakeAble(ColorType colorType)
      {
@@ -144,7 +144,7 @@ public class Stage : MonoBehaviour
           
           for(int i = 0; i < _listBricks.Count; i++)
           {
-               if (_listBricks[i].colorType == colorType)
+               if (_listBricks[i].ColorType == colorType)
                {
                     listPos.Add(_listBricks[i].transform.position);
                }
@@ -164,8 +164,8 @@ public class Stage : MonoBehaviour
      }
      public void OnCharacterEnter(Character character)
      {
-          _currentColors.Add(character.colorType);
-          SpawnFullBrickByColor(character.colorType);
+          _currentColors.Add(character.ColorType);
+          SpawnFullBrickByColor(character.ColorType);
      }
      public void SetMaxPlayer(int maxPlayer)
      {

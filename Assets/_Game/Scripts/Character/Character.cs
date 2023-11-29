@@ -28,9 +28,10 @@ namespace _Game.Character
     
         private Stack<CharacterBrick> _bricks = new Stack<CharacterBrick>();
         private string _currentAnimName;
-        public bool IsFalling { get; } = false;
+
+        public bool IsFalling { get; set; }
         public int BrickAmount => _bricks.Count;
-        public int CurrentStageId { get; private set; }
+        public int CurrentStageId { get; private set; } = 0;
         protected void Start()
         {
             OnInit();
@@ -50,6 +51,15 @@ namespace _Game.Character
         {
             base.OnInit();
             ChangeAnim(CharacterAnimName.Idle);
+            ChangeColor(ColorType.Blue); // TEST: show color
+        }
+        protected virtual void DropBrick()
+        {
+            while (BrickAmount > 0)
+            {
+                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
+                RemoveBrick();
+            }
         }
         private Vector3 GetNextBrickPosInHolder()
         {
@@ -64,14 +74,6 @@ namespace _Game.Character
         {
             CurrentStageId = gateIn.StageId;
             StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
-        }
-        protected virtual void DropBrick()
-        {
-            while (BrickAmount > 0)
-            {
-                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
-                RemoveBrick();
-            }
         }
         protected Vector3 CheckGround(Vector3 nextPoint)
         {
@@ -88,13 +90,13 @@ namespace _Game.Character
             {
                 BridgeBrick bridgeBrick = Cache<BridgeBrick>.GetScript(hit.collider);
 
-                if (bridgeBrick.ColorType != colorType && BrickAmount > 0)
+                if (bridgeBrick.ColorType != ColorType && BrickAmount > 0)
                 {
-                    bridgeBrick.ChangeColor(colorType);
+                    bridgeBrick.ChangeColor(ColorType);
                     RemoveBrick();
                 }
                 
-                if (bridgeBrick.ColorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+                if (bridgeBrick.ColorType != ColorType && BrickAmount == 0 && model.forward.z > 0)
                 {
                     return false;
                 }
@@ -121,7 +123,7 @@ namespace _Game.Character
                 Quaternion.identity, 
                 brickHolder
             );
-            brick.ChangeColor(colorType);
+            brick.ChangeColor(ColorType);
             _bricks.Push(brick);
         }
         public void RemoveBrick()
@@ -148,7 +150,7 @@ namespace _Game.Character
         }
         public bool CheckGate()
         {
-            // UNDONE: Check gate
+            // UNDONE: Remake check gate
             
             if (Physics.Raycast(TF.position, model.forward, out var hit, 1f, gateLayer))
             {

@@ -292,8 +292,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4342106648904138705}
+  - component: {fileID: 5668116121001467740}
   - component: {fileID: 7522833371574376757}
-  - component: {fileID: 6988551790252266595}
+  - component: {fileID: 6326726729561159159}
   m_Layer: 0
   m_Name: Player
   m_TagString: Character
@@ -317,6 +318,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5668116121001467740
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342106648904138543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7522833371574376757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -333,19 +348,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6988551790252266595
-BoxCollider:
+--- !u!114 &6326726729561159159
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342106648904138543}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd67e2a13153e584bbce9d7540290376, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 0
+  colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
+  renderer: {fileID: 5183748451990090374}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  stairLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  gateLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  anim: {fileID: 5158780854325913204}
+  model: {fileID: 4307969573940056282}
+  brickHolder: {fileID: 4342106647374914131}
+  joystick: {fileID: 0}
+  moveSpeed: 6
 --- !u!1 &4434858497945783070
 GameObject:
   m_ObjectHideFlags: 0

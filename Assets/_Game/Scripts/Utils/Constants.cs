@@ -18,6 +18,5 @@ namespace Utils
         // Game play
         public const int MaxLevel = 1;
         public const float TimeToStartGame = 3f;
-        public const int MaxDistanceStartCharPos = 20;
     }
 }

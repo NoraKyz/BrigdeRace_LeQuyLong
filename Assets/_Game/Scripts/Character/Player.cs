@@ -33,7 +33,7 @@ namespace _Game.Character
         
             if (Vector3.Distance(_inputDirection, Vector3.zero) > Constants.MinSwipeDistance)
             {
-                Vector3 nextPoint = TF.position + _inputDirection.normalized * (moveSpeed * Time.deltaTime);
+                Vector3 nextPoint = TF.position + _inputDirection * (moveSpeed * Time.deltaTime);
             
                 RotateTowardMoveDirection(nextPoint);
             
