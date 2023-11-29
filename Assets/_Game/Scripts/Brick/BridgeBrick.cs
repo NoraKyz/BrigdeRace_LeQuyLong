@@ -11,10 +11,10 @@ namespace _Game.Brick
             {
                 Character.Character character = Cache<Character.Character>.GetScript(other);
 
-                if (character.colorType != colorType && character.BrickAmount > 0)
+                if (character.ColorType != colorType && character.BrickAmount > 0)
                 {
                     character.RemoveBrick();
-                    ChangeColor(character.colorType);
+                    ChangeColor(character.ColorType);
                 }
             }
         }

@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Framework;
 using _Game.Brick;
 using _Game.Framework.Event;
 using _Game.Utils;
 using UnityEngine;
 using Utils;
-using Cache = _Framework.Cache;
+
 
 namespace _Game.Character
 {
@@ -38,7 +39,7 @@ namespace _Game.Character
         {
             if (other.CompareTag("Character"))
             {
-                Character character = Cache.GetCharacter(other);
+                Character character = Cache<Character>.GetScript(other);
                 if(character.BrickAmount > BrickAmount && BrickAmount > 0)
                 {
                     DropBrick();
@@ -59,6 +60,19 @@ namespace _Game.Character
         
             return _bricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
         }
+        private void OnNextStage(GateIn gateIn)
+        {
+            CurrentStageId = gateIn.StageId;
+            StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
+        }
+        protected virtual void DropBrick()
+        {
+            while (BrickAmount > 0)
+            {
+                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
+                RemoveBrick();
+            }
+        }
         protected Vector3 CheckGround(Vector3 nextPoint)
         {
             if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, groundLayer))
@@ -72,26 +86,21 @@ namespace _Game.Character
         {
             if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, stairLayer))
             {
-                BridgeBrick bridgeBrick = hit.collider.GetComponent<BridgeBrick>();
+                BridgeBrick bridgeBrick = Cache<BridgeBrick>.GetScript(hit.collider);
 
-                if (bridgeBrick.colorType != colorType && BrickAmount > 0)
+                if (bridgeBrick.ColorType != colorType && BrickAmount > 0)
                 {
                     bridgeBrick.ChangeColor(colorType);
                     RemoveBrick();
                 }
-
-                if (bridgeBrick.colorType != colorType && BrickAmount == 0 && model.forward.z > 0)
+                
+                if (bridgeBrick.ColorType != colorType && BrickAmount == 0 && model.forward.z > 0)
                 {
                     return false;
                 }
             }
-
+            
             return true;
-        }
-        protected virtual void OnNextStage(GateIn gateIn)
-        {
-            CurrentStageId = gateIn.StageId;
-            StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
         }
         public void ChangeAnim(string animName)
         {
@@ -115,17 +124,9 @@ namespace _Game.Character
             brick.ChangeColor(colorType);
             _bricks.Push(brick);
         }
-        public virtual void RemoveBrick()
+        public void RemoveBrick()
         {
             SimplePool.Despawn(_bricks.Pop());
-        }
-        public virtual void DropBrick()
-        {
-            while (BrickAmount > 0)
-            {
-                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
-                RemoveBrick();
-            }
         }
         public virtual void OnWinPos()
         {
@@ -134,25 +135,22 @@ namespace _Game.Character
         public IEnumerator MovePosition(Vector3 targetPosition, float duration)
         {
             float time = 0;
-            Vector3 startPosition = transform.position;
+            Vector3 startPosition = TF.position;
         
             while (time < duration)
             {
-                transform.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
+                TF.position = Vector3.Lerp(startPosition, targetPosition, time / duration);
                 time += Time.deltaTime;
                 yield return null;
             }
         
-            transform.position = targetPosition;
-        }
-        public void SetStage(Stage stage)
-        {
-            currentStage = stage;
+            TF.position = targetPosition;
         }
         public bool CheckGate()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, model.transform.forward, out hit, 1f, gateLayer))
+            // UNDONE: Check gate
+            
+            if (Physics.Raycast(TF.position, model.forward, out var hit, 1f, gateLayer))
             {
                 GateIn gateIn = hit.collider.GetComponent<GateIn>();
 

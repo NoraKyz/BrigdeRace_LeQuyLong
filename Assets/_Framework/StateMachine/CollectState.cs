@@ -1,4 +1,5 @@
-﻿using _Game.Pattern.StateMachine;
+﻿using _Game.Character;
+using _Game.Pattern.StateMachine;
 
 namespace _Game.Framework.StateMachine
 {

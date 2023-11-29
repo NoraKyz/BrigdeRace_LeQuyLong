@@ -1,79 +1,68 @@
-using _Game.Character;
 using _Game.Framework.Event;
-using Camera;
 using UnityEngine;
 using Utils;
 
-public class Player : Character
+namespace _Game.Character
 {
-    [Header("Controller")] 
-    [SerializeField] private FloatingJoystick joystick;
-    [SerializeField] protected float moveSpeed;
-    
-    private Vector3 _inputDirection;
-    
-    private void Awake()
+    public class Player : Character
     {
-        if (joystick == null)
-        {
-            joystick = FindObjectOfType<FloatingJoystick>();
-        }
-
-        CameraFollow cameraFollow = FindObjectOfType<CameraFollow>();
-
-        if (cameraFollow != null)
-        {
-            cameraFollow.SetTarget(transform);
-        }
-    }
+        [Header("Controller")] 
+        [SerializeField] private FloatingJoystick joystick;
+        [SerializeField] private float moveSpeed;
     
-    private void Update()
-    {
-        Move();
-    }
-    protected override void Move()
-    {
-        if (isFalling)
+        private Vector3 _inputDirection;
+        private void Awake()
         {
-            return;
-        }
-
-        _inputDirection.Set(joystick.Horizontal, 0, joystick.Vertical);
-        
-        if (_inputDirection != Vector3.zero)
-        {
-            Vector3 nextPoint = transform.position + _inputDirection.normalized * moveSpeed * Time.deltaTime;
-            
-            RotateTowardMoveDirection(nextPoint);
-            
-            if (CanMove(nextPoint))
+            if (joystick == null)
             {
-                transform.position = CheckGround(nextPoint);
+                joystick = FindObjectOfType<FloatingJoystick>();
             }
-            
-            ChangeAnim(CharacterAnimName.Run);
         }
-        else
+        private void Update()
         {
-            ChangeAnim(CharacterAnimName.Idle);
+            Move();
         }
-    }
+        private void Move()
+        {
+            if (IsFalling)
+            {
+                return;
+            }
 
-    private void RotateTowardMoveDirection(Vector3 nextPoint)
-    {
-        Vector3 direction = nextPoint - transform.position;
-        direction.y = 0;
-        model.forward = direction;
-    }
-
-    public override void OnWinPos()
-    {
-        base.OnWinPos();
-        this.PostEvent(EventID.PlayerWin);
-    }
-
-    private bool CanMove(Vector3 nextPoint)
-    {
-        return CheckStair(nextPoint) && CheckGate(); 
+            _inputDirection.Set(joystick.Horizontal, 0, joystick.Vertical);
+        
+            if (Vector3.Distance(_inputDirection, Vector3.zero) > Constants.MinSwipeDistance)
+            {
+                Vector3 nextPoint = TF.position + _inputDirection.normalized * (moveSpeed * Time.deltaTime);
+            
+                RotateTowardMoveDirection(nextPoint);
+            
+                if (CanMove(nextPoint))
+                {
+                    TF.position = CheckGround(nextPoint);
+                }
+            
+                ChangeAnim(CharacterAnimName.Run);
+            }
+            else
+            {
+                ChangeAnim(CharacterAnimName.Idle);
+            }
+        }
+        private void RotateTowardMoveDirection(Vector3 nextPoint)
+        {
+            Vector3 direction = nextPoint - TF.position;
+            direction.y = 0;
+            model.forward = direction;
+        }
+        public override void OnWinPos()
+        {
+            base.OnWinPos();
+            this.PostEvent(EventID.PlayerWin);
+        }
+        private bool CanMove(Vector3 nextPoint)
+        {
+            return CheckStair(nextPoint) && CheckGate(); 
+        }
     }
 }

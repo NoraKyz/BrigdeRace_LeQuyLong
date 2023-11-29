@@ -5,7 +5,7 @@ namespace Utils
     public static class Constants
     {
         // Input
-        public const float MinSwipeDistance = 0.1f;
+        public const float MinSwipeDistance = 0.01f;
         
         // Brick
         public static readonly Vector3 BridgeBrickSize = new Vector3(2f,0.3f,2f);

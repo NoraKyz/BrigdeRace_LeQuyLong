@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Game.Character;
+using UnityEngine;
 using Utils;
 
 namespace _Game.Framework.StateMachine

@@ -10,7 +10,9 @@ namespace _Game.Utils
         [SerializeField] private ColorData colorData;
         [SerializeField] private Renderer renderer;
         
-        public ColorType colorType;
+        protected ColorType colorType;
+        
+        public ColorType ColorType => colorType;
 
         protected virtual void OnInit()
         {
