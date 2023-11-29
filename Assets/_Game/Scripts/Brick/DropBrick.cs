@@ -11,7 +11,7 @@ namespace _Game.Brick
         private void OnEnable()
         {
             _isTakeAble = false;
-            StartCoroutine(TakeAble());
+            StartCoroutine(TakeAbleCd());
         }
 
         private void OnTriggerEnter(Collider other)
@@ -33,7 +33,7 @@ namespace _Game.Brick
             }
         }
     
-        private IEnumerator TakeAble()
+        private IEnumerator TakeAbleCd()
         {
             yield return new WaitForSeconds(1f);
             _isTakeAble = true;

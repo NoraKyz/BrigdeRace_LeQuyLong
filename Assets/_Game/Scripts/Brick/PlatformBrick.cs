@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Cache = _Framework.Cache;
 
 namespace _Game.Brick
 {
@@ -10,7 +11,7 @@ namespace _Game.Brick
         {
             if (other.CompareTag("Character"))
             {
-                Character.Character character = other.GetComponent<Character.Character>();
+                Character.Character character = Cache.GetCharacter(other);
 
                 if (character.colorType == colorType && !character.isFalling)
                 {
