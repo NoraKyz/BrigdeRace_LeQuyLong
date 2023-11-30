@@ -71,12 +71,6 @@ namespace _Game.Character
             {
                 BridgeBrick bridgeBrick = Cache<BridgeBrick>.GetScript(hit.collider);
 
-                if (bridgeBrick.ColorType != ColorType && BrickAmount > 0)
-                {
-                    bridgeBrick.ChangeColor(ColorType);
-                    RemoveBrick();
-                }
-                
                 if (bridgeBrick.ColorType != ColorType && BrickAmount == 0 && model.forward.z > 0)
                 {
                     return false;
