@@ -1,8 +1,6 @@
-using _Framework;
-using _Game.Framework.Event;
-using _Game.Map;
-using _UI.Scripts.UI;
-using Camera;
+using _Framework.Event.Scripts;
+using _Game.Camera;
+using _Game.Manager;
 using UnityEngine;
 using Utils;
 
@@ -88,16 +86,17 @@ namespace _Game.Character
             
             return true;
         }
-        public override void OnEnterStage(int stageID)
+        public override void SetCurrentStageID(int stageID)
         {
-            base.OnEnterStage(stageID);
+            base.SetCurrentStageID(stageID);
             StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
 
         }
         public override void OnWinPos()
         {
-            this.PostEvent(EventID.PlayerWin);
             base.OnWinPos();
+            this.PostEvent(EventID.GameFinish, GameResult.Win);
+            ChangeAnim(CharacterAnimName.Win);
         }
     }
 }

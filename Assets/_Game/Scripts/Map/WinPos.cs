@@ -11,7 +11,7 @@ namespace _Game.Map
         {
             if (other.CompareTag(TagName.Character))
             {
-                Character.Character character = Cache<Character.Character>.GetScript(other);
+                Character.Character character = Cache<Character.Character>.GetComponent(other);
             
                 character.OnWinPos();
                 StartCoroutine(character.MovePosition(top1Pos.position, 0.5f));

@@ -24,7 +24,7 @@ namespace _Game.Brick
         
             if (other.CompareTag(TagName.Character))
             {
-                Character.Character character = Cache<Character.Character>.GetScript(other);
+                Character.Character character = Cache<Character.Character>.GetComponent(other);
         
                 if (!character.IsFalling)
                 {

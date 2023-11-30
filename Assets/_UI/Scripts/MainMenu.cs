@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Game.Level;
-using _UI.Scripts.UI;
+using _Game.Manager;
 using UnityEngine;
 
 public class MainMenu : UICanvas

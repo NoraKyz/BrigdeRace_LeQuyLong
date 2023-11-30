@@ -7,24 +7,18 @@ namespace _Game.Level
 {
     public class Level : MonoBehaviour
     {
-        private const float RangeStartPos = 25f;
-    
         [SerializeField] private Transform startCharPos;
+        [SerializeField] private float rangeStartPos;
         [SerializeField] private Stage startStage;
         [SerializeField] private List<Character.Character> characters = new List<Character.Character>();
         
         private List<ColorType> _listColor = new List<ColorType>();
         private void Start()
         {
-            OnInit();
-        }
-        private void OnInit()
-        {
             _listColor = GetListColor();
             startStage.SetCurrentColors(_listColor);
             SetStartCharPos();
         }
-
         private List<ColorType> GetListColor()
         {
             List<ColorType> listColor = new List<ColorType>();
@@ -36,7 +30,6 @@ namespace _Game.Level
 
             return listColor;
         }
-    
         private void SetStartCharPos()
         {
             int charCount = characters.Count;
@@ -44,7 +37,7 @@ namespace _Game.Level
         
             for(int i = 0; i < characters.Count; i++)
             {
-                characters[i].TF.position = startPos + Vector3.right * (RangeStartPos / (charCount - 1) * i - RangeStartPos / 2);
+                characters[i].TF.position = startPos + Vector3.right * (rangeStartPos / (charCount - 1) * i - rangeStartPos / 2);
                 
                 characters[i].SetCurrentStage(startStage);
             }

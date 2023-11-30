@@ -6,7 +6,7 @@ namespace _Framework
     public static class Cache <T>
     {
         private static Dictionary<Collider, T> _dict = new Dictionary<Collider, T>();
-        public static T GetScript(Collider collider)
+        public static T GetComponent(Collider collider)
         {
             if (_dict.TryGetValue(collider, out var value))
             {

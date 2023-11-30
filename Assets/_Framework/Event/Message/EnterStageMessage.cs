@@ -1,5 +1,4 @@
 ﻿using _Game.Character;
-using Utils;
 
 namespace _Framework.Event.Message
 {

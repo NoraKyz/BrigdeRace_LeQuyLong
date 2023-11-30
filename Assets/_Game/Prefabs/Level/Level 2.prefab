@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startCharPos: {fileID: 4751765622207008969}
+  rangeStartPos: 10
   startStage: {fileID: 3240453856831549950}
   characters:
   - {fileID: 8391612213749717766}

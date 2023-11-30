@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using _Framework.Singleton;
 using _Game.Manager;
 using UnityEngine;
-using Utils;
 
 namespace _Game.Level
 {
@@ -11,6 +11,10 @@ namespace _Game.Level
         
         private GameObject _currentLevel;
 
+        public void LoadCurrentLevel()
+        {
+            LoadLevel(DataManager.Instance.CurrentLevelId);
+        }
         private void LoadLevel(int id)
         {
             if (_currentLevel != null)
@@ -20,12 +24,6 @@ namespace _Game.Level
         
             _currentLevel = Instantiate(levelPrefabs[id], transform);
         }
-    
-        public void LoadCurrentLevel()
-        {
-            LoadLevel(DataManager.Instance.CurrentLevelId);
-        }
-    
         public void ClearCurrentLevel()
         {
             if (_currentLevel != null)

@@ -62,7 +62,7 @@ MonoBehaviour:
   poolType: 4
   colorType: 0
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
-  renderer: {fileID: 4547519837336414415}
+  render: {fileID: 4547519837336414415}
 --- !u!1 &9172190985823867234
 GameObject:
   m_ObjectHideFlags: 0

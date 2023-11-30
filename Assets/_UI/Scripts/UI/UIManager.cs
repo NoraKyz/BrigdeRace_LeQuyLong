@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using _Framework.Singleton;
 using UnityEngine;
 using UnityEngine.Events;
 

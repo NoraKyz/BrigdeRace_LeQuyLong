@@ -363,7 +363,8 @@ MonoBehaviour:
   poolType: 0
   colorType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
-  renderer: {fileID: 5183748451990090374}
+  render: {fileID: 5183748451990090374}
+  currentStage: {fileID: 0}
   anim: {fileID: 5158780854325913204}
   model: {fileID: 4307969573940056282}
   brickHolder: {fileID: 4342106647374914131}

@@ -1,6 +1,6 @@
-namespace _Game.Framework.StateMachine
+namespace _Framework.StateMachine
 {
-    public interface IState<T>
+    public interface IState<in T>
     {
         void OnEnter(T t);
         void OnExecute(T t);

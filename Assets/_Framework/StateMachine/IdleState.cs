@@ -1,9 +1,8 @@
 using _Game.Character;
-using _Game.Pattern.StateMachine;
 using UnityEngine;
 using Utils;
 
-namespace _Game.Framework.StateMachine
+namespace _Framework.StateMachine
 {
     public class IdleState : IState<Enemy>
     {
@@ -13,6 +12,7 @@ namespace _Game.Framework.StateMachine
         public void OnEnter(Enemy enemy)
         {
             _timer = 0;
+            
             enemy.ChangeAnim(CharacterAnimName.Idle);
         }
 

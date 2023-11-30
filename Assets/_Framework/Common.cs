@@ -5,10 +5,9 @@
 using System.Diagnostics;
 using UnityEngine;
 
-
-namespace _Game.Framework.Debug
+namespace _Framework
 {
-	public class Common
+	public static class Common
 	{
 		//-----------------------------------
 		//--------------------- Log , warning, 
@@ -61,21 +60,21 @@ namespace _Game.Framework.Debug
 		//---------------------------------------------
 		//------------- Assert ------------------------
 
-		/// Thown an exception if condition = false
+		/// Throw an exception if condition = false
 		[Conditional("ASSERT")]
 		public static void Assert(bool condition)
 		{
 			if (! condition) throw new UnityException();
 		}
 
-		/// Thown an exception if condition = false, show message on console's log
+		/// Throw an exception if condition = false, show message on console's log
 		[Conditional("ASSERT")]
 		public static void Assert(bool condition, string message)
 		{
 			if (! condition) throw new UnityException(message);
 		}
 
-		/// Thown an exception if condition = false, show message on console's log
+		/// Throw an exception if condition = false, show message on console's log
 		[Conditional("ASSERT")]
 		public static void Assert(bool condition, string format, params object[] args)
 		{

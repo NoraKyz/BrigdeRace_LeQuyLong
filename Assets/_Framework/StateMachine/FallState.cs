@@ -1,9 +1,8 @@
 ﻿using _Game.Character;
-using _Game.Framework.StateMachine;
 using UnityEngine;
 using Utils;
 
-namespace _Game.Pattern.StateMachine
+namespace _Framework.StateMachine
 {
     public class FallState: IState<Enemy>
     {
@@ -20,6 +19,7 @@ namespace _Game.Pattern.StateMachine
         public void OnExecute(Enemy enemy)
         {
             _timer += Time.deltaTime;
+            
             if (_timer >= StunTime)
             {
                 enemy.ChangeState(enemy.CollectState);

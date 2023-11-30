@@ -1,7 +1,6 @@
 using _Framework;
 using _Framework.Event.Message;
-using _Game.Character;
-using _Game.Framework.Event;
+using _Framework.Event.Scripts;
 using _Game.Utils;
 using UnityEngine;
 
@@ -14,12 +13,12 @@ namespace _Game.Map
         {
             if (other.CompareTag(TagName.Character))
             {
-                Character.Character character = Cache<Character.Character>.GetScript(other);
+                Character.Character character = Cache<Character.Character>.GetComponent(other);
 
                 if (character.CurrentStageId != stageID)
                 {
-                    character.OnEnterStage(stageID);
                     this.PostEvent(EventID.CharacterEnterStage, new EnterStageMessage(stageID, character));
+                    character.SetCurrentStageID(stageID);
                 }
             }
         }

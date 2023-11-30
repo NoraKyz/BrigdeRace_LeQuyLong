@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Framework.Event.Message;
+using _Framework.Event.Scripts;
 using _Game.Brick;
-using _Game.Framework.Event;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -25,29 +24,30 @@ namespace _Game.Map
           private bool HasPosValid => _listNoneBrickPos.Count > 0;
           private List<PlatformBrick> _listBricks = new List<PlatformBrick>();
           private List<Vector3> _listNoneBrickPos = new List<Vector3>();
-     
-          private void Awake()
-          {
-               _maxBrick = numRows * numCols;
-               InitEvent();
-          }
           private void Start()
           {
-               OnInit();
-          }
-          private void OnInit()
-          {
+               _maxBrick = numRows * numCols;
+               
                GetAllNoneBrickPos();
 
                for (int i = 0; i < currentColors.Count; i++)
                {
                     SpawnFullBrickByColor(currentColors[i]);
                }
+               
+               RegisterEvents();
           }
-
-          private void InitEvent()
+          private void RegisterEvents()
           {
                this.RegisterListener(EventID.CharacterEnterStage, (message) => OnCharacterEnter(message as EnterStageMessage));
+          }
+          private void OnDestroy()
+          {
+               RemoveEvents();
+          }
+          private void RemoveEvents()
+          {
+               this.RemoveListener(EventID.CharacterEnterStage, (message) => OnCharacterEnter(message as EnterStageMessage));
           }
           private void GetAllNoneBrickPos()
           {
@@ -60,6 +60,30 @@ namespace _Game.Map
                          Vector3 pos = new Vector3(startPos.x + offset.x * j, startPos.y, startPos.z - offset.z * i);
                          _listNoneBrickPos.Add(pos);
                     }
+               }
+          }
+          private ColorType GetRandomColorValid()
+          {
+               if (IsMaxAllBrick())
+               {
+                    return ColorType.None;
+               }
+               
+               while (true)
+               {
+                    ColorType colorType = currentColors[Random.Range(0, currentColors.Count)];
+
+                    if (!IsMaxBrickByColor(colorType))
+                    {
+                         return colorType;
+                    }
+               }
+          }
+          private void SpawnFullBrickByColor(ColorType colorType)
+          {
+               while(!IsMaxBrickByColor(colorType) && HasPosValid)
+               {
+                    SpawnBrickRandPos(colorType);
                }
           }
           private void SpawnBrickRandPos(ColorType colorType)
@@ -82,22 +106,21 @@ namespace _Game.Map
                _listBricks.Add(brick);
                _listNoneBrickPos.Remove(pos);
           }
-          private ColorType GetRandomColorValid()
+          private bool IsMaxAllBrick()
           {
-               if (IsMaxAllBrick())
+               for (int i = 0; i < currentColors.Count; i++)
                {
-                    return ColorType.None;
-               }
-               
-               while (true)
-               {
-                    ColorType colorType = currentColors[Random.Range(0, currentColors.Count)];
-
-                    if (!IsMaxBrickByColor(colorType))
+                    if (!IsMaxBrickByColor(currentColors[i]))
                     {
-                         return colorType;
+                         return false;
                     }
                }
+
+               return true;
+          }
+          private bool IsMaxBrickByColor(ColorType colorType)
+          {
+               return GetAmountBrickByColor(colorType) > _maxBrick / playerCount + 1;
           }
           private int GetAmountBrickByColor(ColorType colorType)
           {
@@ -111,22 +134,6 @@ namespace _Game.Map
                }
 
                return count;
-          }
-          private bool IsMaxBrickByColor(ColorType colorType)
-          {
-               return GetAmountBrickByColor(colorType) > _maxBrick / playerCount + 1;
-          }
-          private bool IsMaxAllBrick()
-          {
-               for (int i = 0; i < currentColors.Count; i++)
-               {
-                    if (!IsMaxBrickByColor(currentColors[i]))
-                    {
-                         return false;
-                    }
-               }
-
-               return true;
           }
           private void OnDespawnBrickEvent(PlatformBrick brick)
           {
@@ -144,22 +151,13 @@ namespace _Game.Map
                     SpawnBrickRandPos(GetRandomColorValid());
                }
           }
-          private void SpawnFullBrickByColor(ColorType colorType)
-          {
-               while(!IsMaxBrickByColor(colorType) && HasPosValid)
-               {
-                    SpawnBrickRandPos(colorType);
-               }
-          }
           private void OnCharacterEnter(EnterStageMessage message)
           {
                Character.Character character = message.Character;
                
-               character.SetCurrentStage(this);
-               
                if (message.StageID == stageID)
                {
-                    
+                    character.SetCurrentStage(this);
                     currentColors.Add(character.ColorType);
                     SpawnFullBrickByColor(character.ColorType);
                }
@@ -191,7 +189,6 @@ namespace _Game.Map
           {
                currentColors = colors;
           }
-
           public Vector3 GetRandomTargetPos()
           {
                return listTargetPoint[Random.Range(0, listTargetPoint.Count)].position;

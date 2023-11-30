@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using _Game.Framework.Event;
-using _Game.Framework.StateMachine;
-using _Game.Pattern.StateMachine;
+﻿using _Framework.Event.Scripts;
+using _Framework.StateMachine;
+using _Game.Manager;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,65 +22,19 @@ namespace _Game.Character
         public Vector3 NextPosition => navMeshAgent.nextPosition;
 
         #region States
-        public IdleState IdleState { get; private set; }
+
+        private IdleState IdleState { get; set; }
         public CollectState CollectState { get; private set; }
-        public MoveToFinishPointState MoveToFinishPointState { get; private set; }
-        public FallState FallState { get; private set; }
+        private MoveToFinishPointState MoveToFinishPointState { get; set; }
+        private FallState FallState { get; set; }
 
         #endregion
-        private void Awake()
-        {
-            IdleState = new IdleState();
-            CollectState = new CollectState();
-            MoveToFinishPointState = new MoveToFinishPointState();
-            FallState = new FallState();
-            
-            InitEvent();
-        }
-        private void Update()
-        {
-            if (_currentState != null)
-            {
-                _currentState.OnExecute(this);
-            }
-            
-            Debug.Log(_destination);
-        }
-        private void InitEvent()
-        {
-            this.RegisterListener(EventID.PlayerWin, (param) => StopMove());
-            this.RegisterListener(EventID.PlayerLose, (param) => StopMove());
-        }
-        private void MoveToPosition(Vector3 position)
-        {
-            _destination = position;
-            navMeshAgent.enabled = true;
-            navMeshAgent.SetDestination(_destination);
-            ChangeAnim(CharacterAnimName.Run);
-        }
-        public void RandomChanceMoveToFinishPos()
-        {
-            
-            if (Utilities.Chance(botConfig.chanceToFinishPoint))
-            {
-                ChangeState(MoveToFinishPointState);
-            }
-            else
-            {
-                MoveToRandomBrick();
-            }
-        }
         protected override void OnInit()
         {
             base.OnInit();
         
             navMeshAgent.speed = botConfig.moveSpeed;
             ChangeState(IdleState);
-        }
-        protected override void DropBrick()
-        {
-            base.DropBrick();
-            ChangeState(FallState);
         }
         public void ChangeState(IState<Enemy> state)
         {
@@ -97,10 +50,51 @@ namespace _Game.Character
                 _currentState.OnEnter(this);
             }
         }
-        public void MoveToFinishPos()
+        private void Awake()
         {
-            Vector3 finishPos = currentStage.GetRandomTargetPos();
-            MoveToPosition(finishPos);   
+            IdleState = new IdleState();
+            CollectState = new CollectState();
+            MoveToFinishPointState = new MoveToFinishPointState();
+            FallState = new FallState();
+            
+            RegisterEvents();
+        }
+        private void RegisterEvents()
+        {
+            this.RegisterListener(EventID.GameFinish, _ => StopMove());
+        }
+        private void OnDestroy()
+        {
+            RemoveEvents();
+        }
+        private void RemoveEvents()
+        {
+            this.RemoveListener(EventID.GameFinish, _ => StopMove());
+        }
+        private void Update()
+        {
+            if (_currentState != null)
+            {
+                _currentState.OnExecute(this);
+            }
+        }
+        private void MoveToPosition(Vector3 position)
+        {
+            _destination = position;
+            navMeshAgent.enabled = true;
+            navMeshAgent.SetDestination(_destination);
+            ChangeAnim(CharacterAnimName.Run);
+        }
+        public void RandomChanceMoveToFinishPos()
+        {
+            if (Utilities.Chance(botConfig.chanceToFinishPoint))
+            {
+                ChangeState(MoveToFinishPointState);
+            }
+            else
+            {
+                MoveToRandomBrick();
+            }
         }
         public void MoveToRandomBrick()
         {
@@ -115,16 +109,26 @@ namespace _Game.Character
                 ChangeState(MoveToFinishPointState);
             }
         }   
+        protected override void DropBrick()
+        {
+            base.DropBrick();
+            ChangeState(FallState);
+        }
+        public void MoveToFinishPos()
+        {
+            Vector3 finishPos = currentStage.GetRandomTargetPos();
+            MoveToPosition(finishPos);   
+        }
         public void StopMove()
         {
             navMeshAgent.enabled = false;
             ChangeAnim(CharacterAnimName.Idle);
         }
-        
         public override void OnWinPos()
         {
-            this.PostEvent(EventID.PlayerLose);
             base.OnWinPos();
+            this.PostEvent(EventID.GameFinish, GameResult.Lose);
+            ChangeAnim(CharacterAnimName.Win);
         }
     }
 }

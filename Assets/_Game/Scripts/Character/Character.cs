@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using _Framework;
 using _Game.Brick;
-using _Game.Framework.Event;
 using _Game.Map;
 using _Game.Utils;
 using UnityEngine;
@@ -17,7 +16,6 @@ namespace _Game.Character
 
         [Header("Components")]
         [SerializeField] protected Stage currentStage;
-        
         [SerializeField] protected Animator anim;
         [SerializeField] protected Transform model;
         [SerializeField] protected Transform brickHolder;
@@ -25,64 +23,12 @@ namespace _Game.Character
         [Header("Layer")]
         [SerializeField] private LayerMask stairLayer;
         
-        private Stack<CharacterBrick> _bricks = new Stack<CharacterBrick>();
+        private Stack<CharacterBrick> _listBricks = new Stack<CharacterBrick>();
         private string _currentAnimName;
 
-        public bool IsFalling { get; set; }
-        public int BrickAmount => _bricks.Count;
-        public int CurrentStageId { get; private set; } = 0;
-        protected void Start()
-        {
-            OnInit();
-        }
-        protected void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag(TagName.Character))
-            {
-                Character character = Cache<Character>.GetScript(other);
-                if(character.BrickAmount > BrickAmount && BrickAmount > 0)
-                {
-                    DropBrick();
-                    StartCoroutine(OnFall());
-                }
-            }
-        }
-        private Vector3 GetNextBrickPosInHolder()
-        {
-            if(BrickAmount == 0)
-            {
-                return Vector3.zero;
-            }
-        
-            return _bricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
-        }
-        protected override void OnInit()
-        {
-            base.OnInit();
-            ChangeAnim(CharacterAnimName.Idle);
-        }
-        protected virtual void DropBrick()
-        {
-            while (BrickAmount > 0)
-            {
-                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
-                RemoveBrick();
-            }
-        }
-        public bool CheckStair(Vector3 nextPoint)
-        {
-            if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, stairLayer))
-            {
-                BridgeBrick bridgeBrick = Cache<BridgeBrick>.GetScript(hit.collider);
-
-                if (bridgeBrick.ColorType != ColorType && BrickAmount == 0 && model.forward.z > 0)
-                {
-                    return false;
-                }
-            }
-            
-            return true;
-        }
+        public bool IsFalling { get; private set; }
+        public int BrickAmount => _listBricks.Count;
+        public int CurrentStageId { get; private set; }
         public void ChangeAnim(string animName)
         {
             if (_currentAnimName == animName)
@@ -94,7 +40,61 @@ namespace _Game.Character
             _currentAnimName = animName;
             anim.SetTrigger(animName);
         }
-        public virtual void AddBrick()
+        protected void Start()
+        {
+            OnInit();
+        }
+        protected override void OnInit()
+        {
+            base.OnInit();
+            
+            IsFalling = false;
+            CurrentStageId = 0;
+            ChangeAnim(CharacterAnimName.Idle);
+        }
+        protected void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag(TagName.Character))
+            {
+                Character character = Cache<Character>.GetComponent(other);
+                
+                if(BrickAmount < character.BrickAmount && BrickAmount > 0)
+                {
+                    DropBrick();
+                    StartCoroutine(OnFall());
+                }
+            }
+        }
+        protected virtual void DropBrick()
+        {
+            while (BrickAmount > 0)
+            {
+                SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
+                RemoveBrick();
+            }
+        }
+        private IEnumerator OnFall()
+        {
+            IsFalling = true;
+            ChangeAnim(CharacterAnimName.Fall);
+            yield return new WaitForSeconds(Constants.StunTime);
+            IsFalling = false;
+        }
+        public bool CheckStair(Vector3 nextPoint)
+        {
+            if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, stairLayer))
+            {
+                BridgeBrick bridgeBrick = Cache<BridgeBrick>.GetComponent(hit.collider);
+
+                if (ColorType != bridgeBrick.ColorType && BrickAmount == 0 && model.forward.z > 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        public void AddBrick()
         {
             CharacterBrick brick = SimplePool.Spawn<CharacterBrick>(
                 PoolType.CharacterBrick, 
@@ -102,18 +102,25 @@ namespace _Game.Character
                 Quaternion.identity, 
                 brickHolder
             );
+            
             brick.ChangeColor(ColorType);
-            _bricks.Push(brick);
+            _listBricks.Push(brick);
+        }
+        private Vector3 GetNextBrickPosInHolder()
+        {
+            if(BrickAmount == 0)
+            {
+                return Vector3.zero;
+            }
+        
+            return _listBricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
         }
         public void RemoveBrick()
         {
-            SimplePool.Despawn(_bricks.Pop());
+            SimplePool.Despawn(_listBricks.Pop());
         }
-        public virtual void OnWinPos()
-        {
-            ChangeAnim(CharacterAnimName.Win);
-        }
-        public virtual void OnEnterStage(int stageId)
+        public virtual void OnWinPos() { }
+        public virtual void SetCurrentStageID(int stageId)
         {
             CurrentStageId = stageId;
         }
@@ -134,13 +141,6 @@ namespace _Game.Character
         public void SetCurrentStage(Stage stage)
         {
             currentStage = stage;
-        }
-        private IEnumerator OnFall()
-        {
-            IsFalling = true;
-            ChangeAnim(CharacterAnimName.Fall);
-            yield return new WaitForSeconds(Constants.StunTime);
-            IsFalling = false;
         }
     }
 }

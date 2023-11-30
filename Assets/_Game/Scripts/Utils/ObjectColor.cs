@@ -9,9 +9,9 @@ namespace _Game.Utils
         [Header("Config Color")]
         [SerializeField] private ColorType colorType;
         [SerializeField] private ColorData colorData;
-        [SerializeField] private Renderer renderer;
+        [SerializeField] private Renderer render;
         public ColorType ColorType => colorType;
-
+        
         protected virtual void OnInit()
         {
             ChangeColor(ColorType);
@@ -20,7 +20,7 @@ namespace _Game.Utils
         public void ChangeColor(ColorType color)
         {
             colorType = color;
-            renderer.material = colorData.GetMaterial(color);
+            render.material = colorData.GetMaterial(color);
         }
     }
 }

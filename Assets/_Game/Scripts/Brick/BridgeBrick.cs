@@ -1,4 +1,3 @@
-using System;
 using _Framework;
 using _Game.Utils;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace _Game.Brick
 {
     public class BridgeBrick : Brick
     {
-        private void OnEnable()
+        private void OnDisable()
         {
             ChangeColor(ColorType.Gray);
         }
@@ -17,12 +16,12 @@ namespace _Game.Brick
         {
             if (other.CompareTag(TagName.Character))
             {
-                Character.Character character = Cache<Character.Character>.GetScript(other);
+                Character.Character character = Cache<Character.Character>.GetComponent(other);
 
-                if (character.ColorType != ColorType && character.BrickAmount > 0)
+                if (ColorType != character.ColorType && character.BrickAmount > 0)
                 {
-                    character.RemoveBrick();
                     ChangeColor(character.ColorType);
+                    character.RemoveBrick();
                 }
             }
         }

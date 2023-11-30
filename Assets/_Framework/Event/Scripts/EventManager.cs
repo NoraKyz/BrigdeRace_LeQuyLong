@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using _Game.Framework.Debug;
+using _Framework.Singleton;
 using UnityEngine;
 
-namespace _Game.Framework.Event
+namespace _Framework.Event.Scripts
 {
     public class EventManager : Singleton<EventManager>
     {
         #region Fields
-        
-		Dictionary<EventID, Action<object>> _listeners = new Dictionary<EventID, Action<object>>();
+
+        private Dictionary<EventID, Action<object>> _listeners = new Dictionary<EventID, Action<object>>();
 		
 		#endregion
 		
@@ -90,6 +90,16 @@ namespace _Game.Framework.Event
 		public static void PostEvent (this MonoBehaviour sender, EventID eventID)
 		{
 			EventManager.Instance.PostEvent(eventID, null);
+		}
+		
+		public static void RemoveListener (this MonoBehaviour listener, EventID eventID, Action<object> callback)
+		{
+			EventManager.Instance.RemoveListener(eventID, callback);
+		}
+		
+		public static void ClearAllListener (this MonoBehaviour listener)
+		{
+			EventManager.Instance.ClearAllListener();
 		}
 	}
 	

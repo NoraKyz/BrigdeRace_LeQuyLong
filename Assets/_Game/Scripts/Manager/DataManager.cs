@@ -1,5 +1,5 @@
+using _Framework.Singleton;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 
 namespace _Game.Manager

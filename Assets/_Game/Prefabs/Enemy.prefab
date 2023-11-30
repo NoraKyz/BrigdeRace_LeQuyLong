@@ -383,26 +383,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
-  colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
-  renderer: {fileID: 5183748451990090374}
   colorType: 0
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
+  render: {fileID: 5183748451990090374}
+  currentStage: {fileID: 0}
+  anim: {fileID: 5158780854325913204}
+  model: {fileID: 4307969573940056282}
+  brickHolder: {fileID: 4342106647374914131}
   stairLayer:
     serializedVersion: 2
     m_Bits: 64
-  gateLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  anim: {fileID: 5158780854325913204}
-  model: {fileID: 4307969573940056282}
-  currentStage: {fileID: 0}
-  brickHolder: {fileID: 4342106647374914131}
-  isFalling: 0
   navMeshAgent: {fileID: 2086161863803518409}
   botConfig: {fileID: 11400000, guid: 5b92425dc21cedc46a8e7b516b9e2899, type: 2}
-  finishPoint: {fileID: 0}
 --- !u!1 &4434858497945783070
 GameObject:
   m_ObjectHideFlags: 0

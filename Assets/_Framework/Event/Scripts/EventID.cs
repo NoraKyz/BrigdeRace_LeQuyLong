@@ -1,10 +1,10 @@
-﻿namespace _Game.Framework.Event
+﻿namespace _Framework.Event.Scripts
 {
     public enum EventID
     {
         None = 0,
         CharacterEnterStage = 1,
-        PlayerWin = 2,
-        PlayerLose = 3,
+        GameFinish = 2,
+        GamePause = 3,
     }
 }

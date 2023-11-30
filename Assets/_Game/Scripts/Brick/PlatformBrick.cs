@@ -13,24 +13,26 @@ namespace _Game.Brick
         {
             OnDespawnEvent = null;
         }
+        
+        protected override void OnDespawn()
+        {
+            base.OnDespawn();
+            OnDespawnEvent?.Invoke(this);
+            OnDespawnEvent = null;
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(TagName.Character))
             {
-                Character.Character character = Cache<Character.Character>.GetScript(other);
+                Character.Character character = Cache<Character.Character>.GetComponent(other);
 
-                if (character.ColorType == ColorType && !character.IsFalling)
+                if (ColorType == character.ColorType && !character.IsFalling)
                 {
                     OnDespawn();
                     character.AddBrick();
                 }
             }
-        }
-    
-        protected override void OnDespawn()
-        {
-            base.OnDespawn();
-            OnDespawnEvent?.Invoke(this);
         }
     }
 }

@@ -1,7 +1,5 @@
 ﻿using _Game.Character;
-using _Game.Pattern.StateMachine;
-
-namespace _Game.Framework.StateMachine
+namespace _Framework.StateMachine
 {
     public class CollectState: IState<Enemy>
     {
