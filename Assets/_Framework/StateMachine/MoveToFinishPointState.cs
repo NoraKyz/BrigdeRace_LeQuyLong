@@ -13,9 +13,9 @@ namespace _Game.Framework.StateMachine
 
         public void OnExecute(Enemy enemy)
         {
-            if (!enemy.CheckStair(enemy.NextPosition))
+            if (!enemy.CheckStair(enemy.NextPosition) || enemy.IsDestination)
             {
-                enemy.NotEnoughBrick();
+                enemy.ChangeState(enemy.CollectState);
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Game.Utils;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace _Game.Brick
         {
             OnInit();
         }
+
         protected virtual void OnDespawn()
         {
             SimplePool.Despawn(this);

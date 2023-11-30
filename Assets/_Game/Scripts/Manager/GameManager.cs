@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using _Game.Framework.Event;
+using _Game.Level;
 using _Game.Manager;
 using _UI.Scripts.UI;
 using UnityEngine;
@@ -56,6 +57,7 @@ public class GameManager : Singleton<GameManager>
     
     private void OnPlayerWin()
     {
+        LevelManager.Instance.ClearCurrentLevel();
         ChangeState(GameState.MainMenu);
         UIManager.Instance.OpenUI<Win>();
         DataManager.Instance.SetNexLevel();
@@ -63,6 +65,7 @@ public class GameManager : Singleton<GameManager>
     
     private void OnPlayerLose()
     {
+        LevelManager.Instance.ClearCurrentLevel();
         ChangeState(GameState.MainMenu);
         UIManager.Instance.OpenUI<Lose>();
     }

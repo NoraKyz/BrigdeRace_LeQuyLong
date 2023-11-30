@@ -17,7 +17,6 @@ public class Win : UICanvas
     }
     public void MainMenuButton()
     {
-        LevelManager.Instance.ClearCurrentLevel();
         UIManager.Instance.OpenUI<MainMenu>();
         Close(0);
     }

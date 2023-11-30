@@ -17,7 +17,6 @@ public class Lose : UICanvas
     }
     public void MainMenuButton()
     {
-        LevelManager.Instance.ClearCurrentLevel();
         UIManager.Instance.OpenUI<MainMenu>();
         Close(0);
     }

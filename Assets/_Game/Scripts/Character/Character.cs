@@ -37,7 +37,7 @@ namespace _Game.Character
         }
         protected void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Character"))
+            if (other.CompareTag(TagName.Character))
             {
                 Character character = Cache<Character>.GetScript(other);
                 if(character.BrickAmount > BrickAmount && BrickAmount > 0)

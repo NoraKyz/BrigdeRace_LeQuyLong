@@ -16,12 +16,10 @@ namespace _Game.Character
         [Header("Properties")]
         [SerializeField] private BotConfig botConfig;
         
-        private bool _isGoingToFinishPoint = false;
         private IState<Enemy> _currentState;
         private Vector3 _destination;
         
         public bool IsDestination => Vector3.Distance(TF.position, _destination + (TF.position.y - _destination.y) * Vector3.up) < 0.1f;
-        public BotConfig BotConfig => botConfig;
         public Vector3 NextPosition => navMeshAgent.nextPosition;
 
         #region States
@@ -46,6 +44,8 @@ namespace _Game.Character
             {
                 _currentState.OnExecute(this);
             }
+            
+            Debug.Log(_destination);
         }
         private void InitEvent()
         {
@@ -61,14 +61,9 @@ namespace _Game.Character
         }
         public void RandomChanceMoveToFinishPos()
         {
-            if (_isGoingToFinishPoint)
-            {
-                return;
-            }
-        
+            
             if (Utilities.Chance(botConfig.chanceToFinishPoint))
             {
-                _isGoingToFinishPoint = true;
                 ChangeState(MoveToFinishPointState);
             }
             else
@@ -125,11 +120,7 @@ namespace _Game.Character
             navMeshAgent.enabled = false;
             ChangeAnim(CharacterAnimName.Idle);
         }
-        public void NotEnoughBrick()
-        {
-            _isGoingToFinishPoint = false;
-            ChangeState(CollectState);
-        }
+        
         public override void OnWinPos()
         {
             this.PostEvent(EventID.PlayerLose);

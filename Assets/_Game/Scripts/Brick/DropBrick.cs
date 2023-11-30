@@ -1,5 +1,6 @@
 using System.Collections;
 using _Framework;
+using _Game.Utils;
 using UnityEngine;
 
 namespace _Game.Brick
@@ -21,7 +22,7 @@ namespace _Game.Brick
                 return;
             }
         
-            if (other.CompareTag("Character"))
+            if (other.CompareTag(TagName.Character))
             {
                 Character.Character character = Cache<Character.Character>.GetScript(other);
         
