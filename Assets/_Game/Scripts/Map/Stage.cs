@@ -1,23 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Framework.Event.Message;
 using _Game.Brick;
 using _Game.Character;
 using _Game.Framework.Event;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 using Random = UnityEngine.Random;
 
 public class Stage : MonoBehaviour
 {
+     [SerializeField] private int stageID;
      [SerializeField] private int numRows, numCols;
      [Header("==========================================")]
      [SerializeField] private Transform startPointSpawn;
      [SerializeField] private Vector3 offset;
+     [SerializeField] private List<ColorType> currentColors = new List<ColorType>();
      
-     private List<ColorType> _currentColors = new List<ColorType>();
      private int _maxBrick;
-     private int _maxPlayer;
+     private int _playerCount = 4; // TEST
      private bool HasPosValid => _listNoneBrickPos.Count > 0;
      private List<PlatformBrick> _listBricks = new List<PlatformBrick>();
      private List<Vector3> _listNoneBrickPos = new List<Vector3>();
@@ -34,11 +37,17 @@ public class Stage : MonoBehaviour
      {
           GetAllNoneBrickPos();
 
-          foreach (ColorType colorType in _currentColors)
+          for (int i = 0; i < currentColors.Count; i++)
           {
-               SpawnFullBrickByColor(colorType);
+               SpawnFullBrickByColor(currentColors[i]);
           }
-     }    
+          
+          InitEvent();
+     }   
+     private void InitEvent()
+     {
+          this.RegisterListener(EventID.CharacterEnterStage, (message) => OnCharacterEnter(message as EnterStageMessage));
+     }
      private void GetAllNoneBrickPos()
     {
         Vector3 startPos = startPointSpawn.position;
@@ -54,8 +63,7 @@ public class Stage : MonoBehaviour
     }
      private void SpawnBrickRandPos(ColorType colorType)
      {
-          int index = Random.Range(0, _listNoneBrickPos.Count);
-          Vector3 pos = _listNoneBrickPos[index];
+          Vector3 pos = _listNoneBrickPos[Random.Range(0, _listNoneBrickPos.Count)];
           
           PlatformBrick brick = SimplePool.Spawn<PlatformBrick>(
                PoolType.PlatformBrick,
@@ -72,7 +80,7 @@ public class Stage : MonoBehaviour
      {
           while (true)
           {
-               ColorType colorType = _currentColors[Random.Range(0, _currentColors.Count)];
+               ColorType colorType = currentColors[Random.Range(0, currentColors.Count)];
 
                if (!IsMaxBrickByColor(colorType))
                {
@@ -88,9 +96,9 @@ public class Stage : MonoBehaviour
      private int GetAmountBrickByColor(ColorType colorType)
      {
           int count = 0;
-          foreach (var brick in _listBricks)
+          for(int i = 0; i < _listBricks.Count; i++)
           {
-               if (brick.ColorType == colorType)
+               if (_listBricks[i].ColorType == colorType)
                {
                     count++;
                }
@@ -100,13 +108,13 @@ public class Stage : MonoBehaviour
      }
      private bool IsMaxBrickByColor(ColorType colorType)
      {
-          return GetAmountBrickByColor(colorType) > _maxBrick / _maxPlayer + 1;
+          return GetAmountBrickByColor(colorType) > _maxBrick / _playerCount + 1;
      }
      private bool IsMaxAllBrick()
      {
-          foreach (var colorType in _currentColors)
+          for (int i = 0; i < currentColors.Count; i++)
           {
-               if (!IsMaxBrickByColor(colorType))
+               if (!IsMaxBrickByColor(currentColors[i]))
                {
                     return false;
                }
@@ -118,11 +126,11 @@ public class Stage : MonoBehaviour
      {
           _listBricks.Remove(brick);
           brick.OnDespawnEvent -= OnDespawnBrickEvent;
-          StartCoroutine(AfterDespawn(brick));
+          StartCoroutine(AfterDespawnBrick(brick));
      }
-     private IEnumerator AfterDespawn(PlatformBrick brick)
+     private IEnumerator AfterDespawnBrick(PlatformBrick brick)
      {
-          Vector3 pos = brick.transform.position;
+          Vector3 pos = brick.TF.position;
           yield return new WaitForSeconds(Constants.RespawnPlatformBrickTime);
           _listNoneBrickPos.Add(pos);
           SpawnBrickRandPos(GetRandomColorValid());
@@ -134,9 +142,13 @@ public class Stage : MonoBehaviour
                SpawnBrickRandPos(colorType);
           }
      }
-     private void OnCharacterOnNextStage(Character character)
+     private void OnCharacterEnter(EnterStageMessage message)
      {
-          SpawnFullBrickByColor(character.ColorType);
+          if (message.StageID == stageID)
+          {
+               currentColors.Add(message.ColorType);
+               SpawnFullBrickByColor(message.ColorType);
+          }
      }
      public Vector3? GetBrickPosTakeAble(ColorType colorType)
      {
@@ -146,29 +158,15 @@ public class Stage : MonoBehaviour
           {
                if (_listBricks[i].ColorType == colorType)
                {
-                    listPos.Add(_listBricks[i].transform.position);
+                    listPos.Add(_listBricks[i].TF.position);
                }
           }
 
           if (listPos.Count > 0)
           {
-               int index = Random.Range(0, listPos.Count);
-               return listPos[index];
+               return listPos[Random.Range(0, listPos.Count)];
           }
 
           return null;
-     }
-     public void SetListColor(List<ColorType> colors)
-     {
-          _currentColors = colors;
-     }
-     public void OnCharacterEnter(Character character)
-     {
-          _currentColors.Add(character.ColorType);
-          SpawnFullBrickByColor(character.ColorType);
-     }
-     public void SetMaxPlayer(int maxPlayer)
-     {
-          _maxPlayer = maxPlayer;
      }
 }

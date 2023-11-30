@@ -17,8 +17,6 @@ namespace _Game.Framework.StateMachine
             {
                 enemy.NotEnoughBrick();
             }
-
-            enemy.CheckGate();
         }
 
         public void OnExit(Enemy enemy)

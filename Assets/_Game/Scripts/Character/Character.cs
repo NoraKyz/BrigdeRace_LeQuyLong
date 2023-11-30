@@ -13,19 +13,15 @@ namespace _Game.Character
     public class Character : ObjectColor
     {
         private const float OffsetCharBrick = 1.2f;
-        
-        [Header("Layer")]
-        [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private LayerMask stairLayer;
-        [SerializeField] private LayerMask gateLayer;
-    
+
         [Header("Components")]
         [SerializeField] protected Animator anim;
         [SerializeField] protected Transform model;
-    
-        [Header("Properties")]
         [SerializeField] protected Transform brickHolder;
-    
+        
+        [Header("Layer")]
+        [SerializeField] private LayerMask stairLayer;
+        
         private Stack<CharacterBrick> _bricks = new Stack<CharacterBrick>();
         private string _currentAnimName;
 
@@ -47,6 +43,15 @@ namespace _Game.Character
                 }
             }
         }
+        private Vector3 GetNextBrickPosInHolder()
+        {
+            if(BrickAmount == 0)
+            {
+                return Vector3.zero;
+            }
+        
+            return _bricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
+        }
         protected override void OnInit()
         {
             base.OnInit();
@@ -60,29 +65,6 @@ namespace _Game.Character
                 SimplePool.Spawn<DropBrick>(PoolType.DropBrick, transform.position, Quaternion.identity);
                 RemoveBrick();
             }
-        }
-        private Vector3 GetNextBrickPosInHolder()
-        {
-            if(BrickAmount == 0)
-            {
-                return Vector3.zero;
-            }
-        
-            return _bricks.Peek().TF.localPosition + Vector3.up * Constants.CharacterBrickSize.y * OffsetCharBrick;
-        }
-        private void OnNextStage(GateIn gateIn)
-        {
-            CurrentStageId = gateIn.StageId;
-            StartCoroutine(MovePosition(TF.position + Vector3.forward * 2f, 0.2f));
-        }
-        protected Vector3 CheckGround(Vector3 nextPoint)
-        {
-            if (Physics.Raycast(nextPoint, Vector3.down, out var hit, 2f, groundLayer))
-            {
-                return hit.point + Vector3.up;
-            }
-
-            return TF.position;
         }
         public bool CheckStair(Vector3 nextPoint)
         {
@@ -134,6 +116,10 @@ namespace _Game.Character
         {
             ChangeAnim(CharacterAnimName.Win);
         }
+        public virtual void OnEnterStage(int stageId)
+        {
+            CurrentStageId = stageId;
+        }
         public IEnumerator MovePosition(Vector3 targetPosition, float duration)
         {
             float time = 0;
@@ -147,27 +133,6 @@ namespace _Game.Character
             }
         
             TF.position = targetPosition;
-        }
-        public bool CheckGate()
-        {
-            // UNDONE: Remake check gate
-            
-            if (Physics.Raycast(TF.position, model.forward, out var hit, 1f, gateLayer))
-            {
-                GateIn gateIn = hit.collider.GetComponent<GateIn>();
-
-                if (gateIn.StageId != CurrentStageId)
-                {
-                    OnNextStage(gateIn);
-                    this.PostEvent(EventID.CharacterOnNextStage, this);
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        
-            return true;
         }
     }
 }
