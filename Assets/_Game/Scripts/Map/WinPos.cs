@@ -1,21 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using _Game.Character;
-using _Game.Framework.Event;
+using _Framework;
 using UnityEngine;
 
-public class WinPos : MonoBehaviour
+namespace _Game.Map
 {
-    [SerializeField] private Transform top1Pos;
-    private void OnTriggerEnter(Collider other)
+    public class WinPos : MonoBehaviour
     {
-        if (other.CompareTag("Character"))
+        [SerializeField] private Transform top1Pos;
+        private void OnTriggerEnter(Collider other)
         {
-            Character character = other.GetComponent<Character>();
+            if (other.CompareTag("Character"))
+            {
+                Character.Character character = Cache<Character.Character>.GetScript(other);
             
-            character.OnWinPos();
-            StartCoroutine(character.MovePosition(top1Pos.position, 0.5f));
+                character.OnWinPos();
+                StartCoroutine(character.MovePosition(top1Pos.position, 0.5f));
+            }
         }
     }
 }

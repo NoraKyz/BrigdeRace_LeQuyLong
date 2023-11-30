@@ -7,20 +7,20 @@ namespace _Game.Utils
     public class ObjectColor : GameUnit
     {
         [Header("Config Color")]
+        [SerializeField] private ColorType colorType;
         [SerializeField] private ColorData colorData;
         [SerializeField] private Renderer renderer;
-        
-        public ColorType ColorType { get; private set; }
+        public ColorType ColorType => colorType;
 
         protected virtual void OnInit()
         {
             ChangeColor(ColorType);
         }
     
-        public void ChangeColor(ColorType colorType)
+        public void ChangeColor(ColorType color)
         {
-            ColorType = colorType;
-            renderer.material = colorData.GetMaterial(colorType);
+            colorType = color;
+            renderer.material = colorData.GetMaterial(color);
         }
     }
 }

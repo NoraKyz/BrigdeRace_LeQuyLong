@@ -56,7 +56,6 @@ namespace _Game.Character
         {
             base.OnInit();
             ChangeAnim(CharacterAnimName.Idle);
-            ChangeColor(ColorType.Blue); // TEST: show color
         }
         protected virtual void DropBrick()
         {

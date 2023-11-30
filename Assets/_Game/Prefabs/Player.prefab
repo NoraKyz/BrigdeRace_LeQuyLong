@@ -361,20 +361,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolType: 0
+  colorType: 1
   colorData: {fileID: 11400000, guid: 9ca80af162010e841bd01fb82fc69594, type: 2}
   renderer: {fileID: 5183748451990090374}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  anim: {fileID: 5158780854325913204}
+  model: {fileID: 4307969573940056282}
+  brickHolder: {fileID: 4342106647374914131}
   stairLayer:
     serializedVersion: 2
     m_Bits: 64
   gateLayer:
     serializedVersion: 2
     m_Bits: 128
-  anim: {fileID: 5158780854325913204}
-  model: {fileID: 4307969573940056282}
-  brickHolder: {fileID: 4342106647374914131}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   joystick: {fileID: 0}
   moveSpeed: 6
 --- !u!1 &4434858497945783070

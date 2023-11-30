@@ -34,9 +34,7 @@ public class Bridge : MonoBehaviour
     private void OnInit()
     {
         SpawnBridge();
-        
         SetSlope();
-        
         SetRope();
     }
 

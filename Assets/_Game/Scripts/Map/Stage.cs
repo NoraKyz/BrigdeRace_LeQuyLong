@@ -28,6 +28,7 @@ public class Stage : MonoBehaviour
      private void Awake()
      {
           _maxBrick = numRows * numCols;
+          InitEvent();
      }
      private void Start()
      {
@@ -41,8 +42,6 @@ public class Stage : MonoBehaviour
           {
                SpawnFullBrickByColor(currentColors[i]);
           }
-          
-          InitEvent();
      }   
      private void InitEvent()
      {
