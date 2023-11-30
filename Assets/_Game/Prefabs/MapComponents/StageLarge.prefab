@@ -363,11 +363,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageID: 0
+  playerCount: 0
   numRows: 10
   numCols: 13
   startPointSpawn: {fileID: 2733371491426062364}
   offset: {x: 2, y: 0, z: 2}
   currentColors: 01000000020000000300000004000000
+  listTargetPoint: []
 --- !u!1 &3736966881382150114
 GameObject:
   m_ObjectHideFlags: 0

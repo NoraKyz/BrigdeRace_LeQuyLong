@@ -12,7 +12,10 @@ namespace _Game.Framework.StateMachine
 
         public void OnExecute(Enemy enemy)
         {
-            
+            if (enemy.IsDestination)
+            {
+                enemy.RandomChanceMoveToFinishPos();
+            }
         }
 
         public void OnExit(Enemy enemy)

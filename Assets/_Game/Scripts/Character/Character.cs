@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _Framework;
 using _Game.Brick;
 using _Game.Framework.Event;
+using _Game.Map;
 using _Game.Utils;
 using UnityEngine;
 using Utils;
@@ -15,6 +16,8 @@ namespace _Game.Character
         private const float OffsetCharBrick = 1.2f;
 
         [Header("Components")]
+        [SerializeField] protected Stage currentStage;
+        
         [SerializeField] protected Animator anim;
         [SerializeField] protected Transform model;
         [SerializeField] protected Transform brickHolder;
@@ -40,6 +43,7 @@ namespace _Game.Character
                 if(character.BrickAmount > BrickAmount && BrickAmount > 0)
                 {
                     DropBrick();
+                    StartCoroutine(OnFall());
                 }
             }
         }
@@ -126,6 +130,17 @@ namespace _Game.Character
             }
         
             TF.position = targetPosition;
+        }
+        public void SetCurrentStage(Stage stage)
+        {
+            currentStage = stage;
+        }
+        private IEnumerator OnFall()
+        {
+            IsFalling = true;
+            ChangeAnim(CharacterAnimName.Fall);
+            yield return new WaitForSeconds(Constants.StunTime);
+            IsFalling = false;
         }
     }
 }

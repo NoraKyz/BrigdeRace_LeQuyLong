@@ -1,5 +1,6 @@
 using _Framework;
 using _Framework.Event.Message;
+using _Game.Character;
 using _Game.Framework.Event;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace _Game.Map
                 if (character.CurrentStageId != stageID)
                 {
                     character.OnEnterStage(stageID);
-                    this.PostEvent(EventID.CharacterEnterStage, new EnterStageMessage(stageID, character.ColorType));
+                    this.PostEvent(EventID.CharacterEnterStage, new EnterStageMessage(stageID, character));
                 }
             }
         }

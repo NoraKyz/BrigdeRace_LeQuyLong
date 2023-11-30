@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using _Game.Framework.Event;
+using _Game.Manager;
 using _UI.Scripts.UI;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,7 @@ public class GameManager : Singleton<GameManager>
 {
     //[SerializeField] UserData userData;
     //[SerializeField] CSVData csv;
-    private static GameState gameState = GameState.MainMenu;
+    private static GameState _gameState = GameState.MainMenu;
 
     // Start is called before the first frame update
     protected void Awake()
@@ -45,12 +46,12 @@ public class GameManager : Singleton<GameManager>
 
     public static void ChangeState(GameState state)
     {
-        gameState = state;
+        _gameState = state;
     }
 
     public static bool IsState(GameState state)
     {
-        return gameState == state;
+        return _gameState == state;
     }
     
     private void OnPlayerWin()

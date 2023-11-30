@@ -1,6 +1,7 @@
 using _Framework;
 using _Game.Framework.Event;
 using _Game.Map;
+using Camera;
 using UnityEngine;
 using Utils;
 
@@ -22,6 +23,9 @@ namespace _Game.Character
             {
                 joystick = FindObjectOfType<FloatingJoystick>();
             }
+            
+            CameraFollow cameraFollow = FindObjectOfType<CameraFollow>();
+            cameraFollow.SetTarget(TF);
         }
         private void Update()
         {
@@ -31,6 +35,7 @@ namespace _Game.Character
         {
             if (IsFalling)
             {
+                ChangeAnim(CharacterAnimName.Fall);
                 return;
             }
 
@@ -90,8 +95,8 @@ namespace _Game.Character
         }
         public override void OnWinPos()
         {
-            base.OnWinPos();
             this.PostEvent(EventID.PlayerWin);
+            base.OnWinPos();
         }
     }
 }

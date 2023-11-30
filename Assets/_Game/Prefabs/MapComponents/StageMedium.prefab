@@ -756,11 +756,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageID: 1
+  playerCount: 0
   numRows: 8
   numCols: 9
   startPointSpawn: {fileID: 2733371491426062364}
   offset: {x: 2, y: 0, z: 2}
   currentColors: 
+  listTargetPoint: []
 --- !u!1 &3047162649048031772
 GameObject:
   m_ObjectHideFlags: 0

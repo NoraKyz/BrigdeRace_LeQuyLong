@@ -7,6 +7,11 @@ namespace _Game.Brick
     public class PlatformBrick : Brick
     {
         public event Action<PlatformBrick> OnDespawnEvent;
+        
+        private void OnEnable()
+        {
+            OnDespawnEvent = null;
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Character"))

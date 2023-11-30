@@ -1,23 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
 
-public class DataManager : Singleton<DataManager>
+namespace _Game.Manager
 {
-    [SerializeField] private int levelId;
-
-    public int LevelId => levelId;
-
-    protected void Awake()
+    public class DataManager : Singleton<DataManager>
     {
-        levelId = PlayerPrefs.GetInt("Level", 1);
-    }
-    public void SetNexLevel()
-    {
-        levelId = levelId + 1 > Constants.MaxLevel ? 1 : levelId + 1;
-        PlayerPrefs.SetInt("Level", levelId);
+        [SerializeField] private int currentLevelId;
+        public int CurrentLevelId => currentLevelId;
+        protected void Awake()
+        {
+            currentLevelId = PlayerPrefs.GetInt("Level", 0);
+        }
+        public void SetNexLevel()
+        {
+            currentLevelId = currentLevelId + 1 >= Constants.MaxLevel ? 0 : currentLevelId + 1;
+            PlayerPrefs.SetInt("Level", currentLevelId);
+        }
     }
 }

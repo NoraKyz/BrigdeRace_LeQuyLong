@@ -1,40 +1,38 @@
-using System.Collections;
 using System.Collections.Generic;
-using _Game.Utils;
+using _Game.Manager;
 using UnityEngine;
 using Utils;
 
-public class LevelManager : Singleton<LevelManager>
+namespace _Game.Level
 {
-    [SerializeField] private List<GameObject> levelPrefabs = new List<GameObject>();
-    [SerializeField] private List<ColorType> colorTypes = new List<ColorType>();
-    
-    private int currentLevelID;
-    private GameObject currentLevel;
-
-    private void LoadLevel(int id)
+    public class LevelManager : Singleton<LevelManager>
     {
-        currentLevelID = id;
-    
-        if (currentLevel != null)
-        {
-            Destroy(currentLevel);
-        }
+        [SerializeField] private List<GameObject> levelPrefabs = new List<GameObject>();
         
-        currentLevel = Instantiate(levelPrefabs[id - 1], transform);
-    }
-    
-    public void LoadCurrentLevel()
-    {
-        LoadLevel(DataManager.Instance.LevelId);
-    }
-    
-    public void ClearCurrentLevel()
-    {
-        if (currentLevel != null)
+        private GameObject _currentLevel;
+
+        private void LoadLevel(int id)
         {
-            SimplePool.CollectAll();
-            Destroy(currentLevel);
+            if (_currentLevel != null)
+            {
+                ClearCurrentLevel();
+            }
+        
+            _currentLevel = Instantiate(levelPrefabs[id], transform);
+        }
+    
+        public void LoadCurrentLevel()
+        {
+            LoadLevel(DataManager.Instance.CurrentLevelId);
+        }
+    
+        public void ClearCurrentLevel()
+        {
+            if (_currentLevel != null)
+            {
+                SimplePool.CollectAll();
+                Destroy(_currentLevel);
+            }
         }
     }
 }
