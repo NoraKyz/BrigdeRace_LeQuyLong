@@ -106,7 +106,7 @@ PrefabInstance:
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: finishPoint
       value: 
-      objectReference: {fileID: 3815133146854826184}
+      objectReference: {fileID: 0}
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: currentStage
       value: 
@@ -200,6 +200,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4844331349727857703}
     m_Modifications:
+    - target: {fileID: 1099323837990482017, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
+      propertyPath: numCols
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1099323837990482017, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
+      propertyPath: numRows
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1099323837990482017, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
       propertyPath: playerCount
       value: 4
@@ -299,11 +307,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7082010476853875030, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
   m_PrefabInstance: {fileID: 4844331349459111579}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3815133146854826184 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8631314506486984275, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
-  m_PrefabInstance: {fileID: 4844331349459111579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5511016740525850362 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1099323837990482017, guid: 6c0cea5a0f2f73f44ac23d020bf74622, type: 3}
@@ -338,7 +341,7 @@ PrefabInstance:
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: finishPoint
       value: 
-      objectReference: {fileID: 3815133146854826184}
+      objectReference: {fileID: 0}
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: currentStage
       value: 
@@ -443,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: finishPoint
       value: 
-      objectReference: {fileID: 3815133146854826184}
+      objectReference: {fileID: 0}
     - target: {fileID: 4200976269123691237, guid: 0dbd91b1d0ea6c749b7352461f4141be, type: 3}
       propertyPath: currentStage
       value: 

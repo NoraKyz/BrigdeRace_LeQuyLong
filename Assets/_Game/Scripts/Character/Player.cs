@@ -1,6 +1,7 @@
 using _Framework;
 using _Game.Framework.Event;
 using _Game.Map;
+using _UI.Scripts.UI;
 using Camera;
 using UnityEngine;
 using Utils;
