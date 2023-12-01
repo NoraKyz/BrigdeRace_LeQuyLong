@@ -9,14 +9,13 @@ public class Lose : UICanvas
 
     public void RestartButton()
     {
-        LevelManager.Instance.LoadCurrentLevel();
         GameManager.ChangeState(GameState.GamePlay);
+        LevelManager.Instance.LoadCurrentLevel();
         Close(0);
     }
     public void MainMenuButton()
     {
         UIManager.Instance.OpenUI<MainMenu>();
-        UIManager.Instance.CloseUI<GamePlay>();
         Close(0);
     }
 }

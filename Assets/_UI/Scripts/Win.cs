@@ -11,14 +11,13 @@ public class Win : UICanvas
     
     public void NextLevelButton()
     {
-        LevelManager.Instance.LoadCurrentLevel();
         GameManager.ChangeState(GameState.GamePlay);
+        LevelManager.Instance.LoadCurrentLevel();
         Close(0);
     }
     public void MainMenuButton()
     {
         UIManager.Instance.OpenUI<MainMenu>();
-        UIManager.Instance.CloseUI<GamePlay>();
         Close(0);
     }
 }

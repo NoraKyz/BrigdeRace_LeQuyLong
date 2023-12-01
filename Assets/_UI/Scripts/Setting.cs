@@ -13,20 +13,7 @@ public class Setting : UICanvas
     
     public void MainMenuButton()
     {
-        GameManager.ChangeState(GameState.MainMenu);
-        LevelManager.Instance.ClearCurrentLevel();
         UIManager.Instance.OpenUI<MainMenu>();
-        UIManager.Instance.CloseUI<GamePlay>();
         Close(0);
-    }
-
-    private void OnEnable()
-    {
-        Time.timeScale = 0;
-    }
-
-    private void OnDisable()
-    {
-        Time.timeScale = 1;
     }
 }

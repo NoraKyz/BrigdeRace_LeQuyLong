@@ -50,29 +50,28 @@ namespace _Game.Character
                 _currentState.OnEnter(this);
             }
         }
+
         private void Awake()
         {
             IdleState = new IdleState();
             CollectState = new CollectState();
             MoveToFinishPointState = new MoveToFinishPointState();
             FallState = new FallState();
-            
             RegisterEvents();
         }
+
         private void RegisterEvents()
         {
             this.RegisterListener(EventID.GameFinish, _ => StopMove());
         }
-        private void OnDestroy()
-        {
-            RemoveEvents();
-        }
-        private void RemoveEvents()
-        {
-            this.RemoveListener(EventID.GameFinish, _ => StopMove());
-        }
+        
         private void Update()
         {
+            if (!GameManager.IsState(GameState.GamePlay))
+            {
+                return;
+            }
+            
             if (_currentState != null)
             {
                 _currentState.OnExecute(this);
