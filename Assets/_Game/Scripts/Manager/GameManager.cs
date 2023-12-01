@@ -71,12 +71,12 @@ namespace _Game.Manager
             UIManager.Instance.OpenUI<Lose>();
         }
         
-        private void PauseGame()
+        public void PauseGame()
         {
             Time.timeScale = 0;
         }
         
-        private void ResumeGame()
+        public void ResumeGame()
         {
             Time.timeScale = 1;
         }

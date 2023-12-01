@@ -16,4 +16,14 @@ public class Setting : UICanvas
         UIManager.Instance.OpenUI<MainMenu>();
         Close(0);
     }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.PauseGame();
+    }
+    
+    private void OnDisable()
+    {
+        GameManager.Instance.ResumeGame();
+    }
 }
