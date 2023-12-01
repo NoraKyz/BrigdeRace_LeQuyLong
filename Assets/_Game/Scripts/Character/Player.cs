@@ -16,8 +16,10 @@ namespace _Game.Character
         [SerializeField] private float moveSpeed;
     
         private Vector3 _inputDirection;
-        private void Awake()
+        protected override void OnInit()
         {
+            base.OnInit();
+            
             if (joystick == null)
             {
                 joystick = FindObjectOfType<FloatingJoystick>();

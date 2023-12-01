@@ -18,6 +18,7 @@ public class Win : UICanvas
     public void MainMenuButton()
     {
         UIManager.Instance.OpenUI<MainMenu>();
+        UIManager.Instance.CloseUI<GamePlay>();
         Close(0);
     }
 }

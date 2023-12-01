@@ -31,6 +31,8 @@ namespace _Game.Level
                 SimplePool.CollectAll();
                 Destroy(_currentLevel);
             }
+            
+            _currentLevel = null;
         }
     }
 }

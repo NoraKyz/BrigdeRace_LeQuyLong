@@ -68,7 +68,12 @@ namespace _Framework.Event.Scripts
 		{
 			_listeners.Clear();
 		}
-		
+
+		private void OnDestroy()
+		{
+			ClearAllListener();
+		}
+
 		#endregion
 	}
 

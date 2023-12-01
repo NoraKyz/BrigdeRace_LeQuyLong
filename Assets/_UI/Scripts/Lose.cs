@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using _Game.Level;
 using _Game.Manager;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class Lose : UICanvas
@@ -18,6 +16,7 @@ public class Lose : UICanvas
     public void MainMenuButton()
     {
         UIManager.Instance.OpenUI<MainMenu>();
+        UIManager.Instance.CloseUI<GamePlay>();
         Close(0);
     }
 }

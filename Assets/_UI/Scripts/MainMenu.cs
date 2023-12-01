@@ -8,8 +8,9 @@ public class MainMenu : UICanvas
 {
     public void PlayButton()
     {
-        LevelManager.Instance.LoadCurrentLevel();
         GameManager.ChangeState(GameState.GamePlay);
+        LevelManager.Instance.LoadCurrentLevel();
+        UIManager.Instance.OpenUI<GamePlay>();
         Close(0);
     }
 }

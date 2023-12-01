@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16c6d5be87424f2eb79f77382653dc9b, type: 3}
   m_Name: BotConfig_2
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 8
   chanceToFinishPoint: 20

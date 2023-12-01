@@ -39,6 +39,8 @@ namespace _Game.Manager
         {
             ChangeState(GameState.MainMenu);
             UIManager.Instance.OpenUI<MainMenu>();
+            UIManager.Instance.OpenUI<GamePlay>();
+            UIManager.Instance.CloseUI<GamePlay>();
         
             RegisterEvent();
         }
@@ -67,6 +69,16 @@ namespace _Game.Manager
         private void OnPlayerLose()
         {
             UIManager.Instance.OpenUI<Lose>();
+        }
+        
+        public void PauseGame()
+        {
+            Time.timeScale = 0;
+        }
+        
+        public void ResumeGame()
+        {
+            Time.timeScale = 1;
         }
     }
 }
